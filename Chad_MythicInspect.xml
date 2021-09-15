@@ -1,0 +1,94 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
+	<Script file="Chad_MythicInspect.lua"/>
+
+	<Frame name="InspectDungeonIconFrameTemplate" mixin="MythicScoreInspectDisplayMixin" virtual="true">
+		<Size x="62" y="62"/>
+		<Layers>
+			<Layer level="BORDER">
+				<Texture atlas="ChallengeMode-DungeonIconFrame" setAllPoints="true"/>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="dungeonIcon">
+					<Size x="60" y="60"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="BORDER" textureSubLevel="2">
+				<FontString parentKey="inspectKeyLevel" inherits="SystemFont_Huge1_Outline" justifyH="CENTER">
+					<Anchors>
+						<Anchor point="TOP" x="0" y="-4"/>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+			</Layer>
+			<Layer level="BORDER" textureSubLevel="2">
+				<FontString parentKey="inspectMapScore" inherits="SystemFont_Outline" justifyH="CENTER">
+					<Anchors>
+						<Anchor point="BOTTOM" x="0" y="4"/>
+					</Anchors>
+					<Color r="1.0" g="1.0" b="1.0"/>
+					<Shadow>
+						<Offset>
+							<AbsDimension x="1" y="-1"/>
+						</Offset>
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Frame name="II_MythicScoreFrame" toplevel="true" parent="InspectFrame" mixin="MythicScoreInspectLayoutMixin" hidden="true" setAllPoints="true" id="5">
+		<Size x="300" y="500" />
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="BG" file="Interface\EncounterJournal\UI-EJ-WrathoftheLichKing">
+					<Size x="320" y="353"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="8" y="-64"/>
+					</Anchors>
+					<TexCoords right="0.501" top="0.1" bottom="0.99"/>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<FontString parentKey="Title" justifyV="TOP" inherits="SystemFont22_Shadow_Outline" text="DUNGEON_SCORE">
+					<Anchors>
+						<Anchor point="CENTER" x="0" y="75"/>
+
+					</Anchors>
+				</FontString>
+				<FontString parentKey="Score" justifyV="TOP" inherits="SystemFont_Shadow_Huge2_Outline">
+					<Anchors>
+						<Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="InspectScoreBoxFrame">
+				<Size x="300" y="150" />
+				<Anchors>
+					<Anchor point="BOTTOM" relativeKey="$parent.II_MythicScoreFrame" relativePoint="BOTTOM" y="50"/>
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad method="OnLoad"/>
+			<OnShow method="OnShow"/>
+
+			<OnHide function="MythicInspect_OnHide"/>
+		</Scripts>
+	</Frame>
+
+	
+
+	
+</Ui>

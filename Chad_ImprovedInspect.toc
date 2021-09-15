@@ -1,0 +1,5 @@
+## RequiredDep: Blizzard_Communities
+## RequiredDep: Blizzard_InspectUI
+
+Chad_ImprovedInspect.xml
+Chad_MythicInspect.xml
