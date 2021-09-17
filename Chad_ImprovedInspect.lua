@@ -11,8 +11,12 @@ IMPROVED_INSPECT_WINDOWS = {
 
 local currentTab = nil;
 
-function SwitchImprovedInspectTabs(id)
+function ImprovedInspect_OnLoad(self)
+	-- This fixes an issue where the INSPECT_HONOR_UPDATE was firing on log in which caused a lua error.
+	INSPECTED_UNIT = "player";
+end
 
+function SwitchImprovedInspectTabs(id)
 	local lastInspectTab = PanelTemplates_GetSelectedTab(InspectFrame)
 	if (lastInspectTab ~= 0) then
 		_G[INSPECTFRAME_SUBFRAMES[lastInspectTab]]:Hide();
@@ -31,7 +35,6 @@ function SwitchImprovedInspectTabs(id)
 		newFrame:Show();
 	end
 end
-
 
 function ImprovedInspect_OnClick (self, button)
 	SwitchImprovedInspectTabs(self:GetID())

@@ -1,16 +1,12 @@
 -- ==================== Save this to sort maps by key level later!!!!!! ====================
 -- table.sort(inspectMythicMaps.runs, function(a, b) return a.bestRunLevel > b.bestRunLevel end);
 
-local storedInspectGUIDMythicInfo = 0;
 local storeMythicScoreInfo = {};
 
 MythicScoreInspectLayoutMixin = {};
 
 function MythicScoreInspectLayoutMixin:OnLoad()
-    --TODO:
-    -- There is a bug here. The map table does not load upon first time logging into the game. This will cause the dungeon frames to not display on the inspect tab. 
-    -- Reloading the UI will fix this. I imagine I need to load the list of dungeon maps but I couldn't find an event or function that did this for me.
-    -- self.maps = C_ChallengeMode.GetMapTable();
+    self:RegisterEvent("INSPECT_READY");
 	self.InspectDungeonsPool = CreateFramePool("Frame", InspectScoreBoxFrame, "InspectDungeonIconFrameTemplate");
 end
 
@@ -39,19 +35,6 @@ function MythicScoreInspectLayoutMixin:BuildMapTable()
         storeMythicScoreInfo[index].keyLevel = scoreInfo.bestRunLevel;
         storeMythicScoreInfo[index].dungeonScore = scoreInfo.mapScore;
     end
-
-    -- for k=1, #self.maps do
-    --     table.insert(storeMythicScoreInfo, k, { mapID = map, timed = 0, keyLevel = 0, dungeonScore = 0 })
-
-    --     storeMythicScoreInfo[k].mapID = self.maps[k];
-    --     for l=1, #inspectMapInfo do
-    --         if (storeMythicScoreInfo[k].mapID == inspectMapInfo[l].challengeModeID) then
-    --             storeMythicScoreInfo[k].timed = inspectMapInfo[l].finishedSuccess;
-    --             storeMythicScoreInfo[k].keyLevel = inspectMapInfo[l].bestRunLevel;
-    --             storeMythicScoreInfo[k].dungeonScore = inspectMapInfo[l].mapScore;
-    --         end
-    --     end
-    -- end
 
     -- for m=1, #storeMythicScoreInfo do
     --     print("MapID: "..storeMythicScoreInfo[m].mapID.." Level: "..storeMythicScoreInfo[m].keyLevel.." Score: "..storeMythicScoreInfo[m].dungeonScore);
