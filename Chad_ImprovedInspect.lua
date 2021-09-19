@@ -6,7 +6,7 @@ IMPROVED_INSPECT_WINDOWS = {
 	"Talents",
 	"Guild",
 	"II_MythicScoreFrame",
-	"II_CovenantFrame",
+	"II_RaidProgressFrame",
 };
 
 local currentTab = nil;
@@ -43,8 +43,8 @@ end
 function ImprovedInspect_OnHide (self)
 	II_MythicScoreFrame:Hide();
 	ImprovedInspectFrameTab1:SetChecked(false);
-	-- II_CovenantFrame:Hide();
-	-- ImprovedInspectFrameTab2:SetChecked(false);
+	II_RaidProgressFrame:Hide();
+	ImprovedInspectFrameTab2:SetChecked(false);
 	currentTab = nil;
 end
 

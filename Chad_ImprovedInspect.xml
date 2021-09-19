@@ -14,7 +14,7 @@
 					<OnClick function="ImprovedInspect_OnClick"/>
 				</Scripts>
 			</CheckButton>
-			<!-- <CheckButton name="ImprovedInspectFrameTab2" hidden="false" inherits="CommunitiesFrameTabTemplate" id = "6" virtual="true" motionScriptsWhileDisabled="true">
+			<CheckButton name="ImprovedInspectFrameTab2" hidden="false" inherits="CommunitiesFrameTabTemplate" id = "6" virtual="true" motionScriptsWhileDisabled="true">
                 <Anchors>
 					<Anchor point="TOP" relativeTo="ImprovedInspectFrameTab1" relativePoint="BOTTOM">
 						<Offset>
@@ -24,11 +24,11 @@
                 </Anchors>
 				<Scripts>
 					<OnLoad>
-						self.Icon:SetTexture("Interface\\Icons\\Ui_sigil_necrolord");
+						self.Icon:SetTexture("Interface\\ENCOUNTERJOURNAL\\UI-EJ-HeroicTextIcon");
 					</OnLoad>
 					<OnClick function="ImprovedInspect_OnClick"/>
 				</Scripts>
-			</CheckButton> -->
+			</CheckButton>
 		</Frames>
 		<Scripts>
 			<OnHide function="ImprovedInspect_OnHide"/>

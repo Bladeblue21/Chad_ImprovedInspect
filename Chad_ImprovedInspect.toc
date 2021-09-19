@@ -3,3 +3,4 @@
 
 Chad_ImprovedInspect.xml
 Chad_MythicInspect.xml
+Chad_RaidProgressInspect.xml
