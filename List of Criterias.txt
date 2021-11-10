@@ -1,0 +1,138 @@
+Castle Nathria
+
+14422	 Shriekwing Kills (Raid Finder Castle Nathria)
+14419	 Shriekwing Kills (Normal Castle Nathria)
+14420	 Shriekwing Kills (Heroic Castle Nathria)
+14421	 Shriekwing Kills (Mythic Castle Nathria)
+
+14426	 Huntsman Altimor Kills (Raid Finder Castle Nathria)
+14423	 Huntsman Altimor Kills (Normal Castle Nathria)
+14424	 Huntsman Altimor Kills (Heroic Castle Nathria)
+14425	 Huntsman Altimor Kills (Mythic Castle Nathria)
+
+14430	 Hungering Destroyer Kills (Raid Finder Castle Nathria)
+14427	 Hungering Destroyer Kills (Normal Castle Nathria)
+14428	 Hungering Destroyer Kills (Heroic Castle Nathria)
+14429	 Hungering Destroyer Kills (Mythic Castle Nathria)
+
+14438	 Sun King's Salvation Kills (Raid Finder Castle Nathria)
+14435	 Sun King's Salvation Kills (Normal Castle Nathria)
+14436	 Sun King's Salvation Kills (Heroic Castle Nathria)
+14437	 Sun King's Salvation Kills (Mythic Castle Nathria)
+
+14434	 Artificer Xy'mox Kills (Raid Finder Castle Nathria)
+14431	 Artificer Xy'mox Kills (Normal Castle Nathria)
+14432	Artificer Xy'mox Kills (Heroic Castle Nathria)
+14433	 Artificer Xy'mox Kills (Mythic Castle Nathria)
+
+14442	 Lady Inerva Darkvein Kills (Raid Finder Castle Nathria)
+14439	 Lady Inerva Darkvein Kills (Normal Castle Nathria)
+14440	 Lady Inerva Darkvein Kills (Heroic Castle Nathria)
+14441	 Lady Inerva Darkvein Kills (Mythic Castle Nathria)
+
+14446	 The Council of Blood Kills (Raid Finder Castle Nathria)
+14443	 The Council of Blood Kills (Normal Castle Nathria)
+14444	 The Council of Blood Kills (Heroic Castle Nathria)
+14445	 The Council of Blood Kills (Mythic Castle Nathria)
+
+14450	 Sludgefist Kills (Raid Finder Castle Nathria)
+14447	 Sludgefist Kills (Normal Castle Nathria)
+14448	 Sludgefist Kills (Heroic Castle Nathria)
+14449	 Sludgefist Kills (Mythic Castle Nathria)
+
+14454	 Stone Legion Generals Kills (Raid Finder Castle Nathria)
+14451	 Stone Legion Generals Kills (Normal Castle Nathria)
+14452	 Stone Legion Generals Kills (Heroic Castle Nathria)
+14453	 Stone Legion Generals Kills (Mythic Castle Nathria)
+
+14458	 Sire Denathrius Kills (Raid Finder Castle Nathria)
+14455	 Sire Denathrius Kills (Normal Castle Nathria)
+14456	 Sire Denathrius Kills (Heroic Castle Nathria)
+14457	 Sire Denathrius Kills (Mythic Castle Nathria)
+
+
+
+
+
+
+Sanctum of Domination
+
+15136	 The Tarragrue Kills (Raid Finder Sanctum of Domination)
+15137	 The Tarragrue Kills (Normal Sanctum of Domination)
+15138	 The Tarragrue Kills (Heroic Sanctum of Domination)
+15139	 The Tarragrue Kills (Mythic Sanctum of Domination)
+
+15140	 The Eye of the Jailer Kills (Raid Finder Sanctum of Domination)
+15141	 The Eye of the Jailer Kills (Normal Sanctum of Domination)
+15142	 The Eye of the Jailer Kills (Heroic Sanctum of Domination)
+15143	 The Eye of the Jailer Kills (Mythic Sanctum of Domination)
+
+15144	 The Nine Kills (Raid Finder Sanctum of Domination)
+15145	 The Nine Kills (Normal Finder Sanctum of Domination)
+15146	 The Nine Kills (Heroic Finder Sanctum of Domination)
+15147	 The Nine Kills (Mythic Finder Sanctum of Domination)
+
+15148	 Remnant of Ner'zhul Kills (Raid Finder Sanctum of Domination)
+15149	 Remnant of Ner'zhul Kills (Normal Sanctum of Domination)
+15150	 Remnant of Ner'zhul Kills (Heroic Sanctum of Domination)
+15151	 Remnant of Ner'zhul Kills (Mythic Sanctum of Domination)
+
+15152	 Soulrender Dormazain Kills (Raid Finder Sanctum of Domination)
+15153	 Soulrender Dormazain Kills (Normal Sanctum of Domination)
+15154	 Soulrender Dormazain Kills (Heroic Sanctum of Domination)
+15155	 Soulrender Dormazain Kills (Mythic Sanctum of Domination)
+
+15156	 Painsmith Raznal Kills (Raid Finder Sanctum of Domination)
+15157	 Painsmith Raznal Kills (Normal Sanctum of Domination)
+15158	 Painsmith Raznal Kills (Heroic Sanctum of Domination)
+15159	 Painsmith Raznal Kills (Mythic Sanctum of Domination)
+
+15160	 Guardian of the First Ones Kills (Raid Finder Sanctum of Domination)
+15161	 Guardian of the First Ones Kills (Normal Sanctum of Domination)
+15162	 Guardian of the First Ones Kills (Heroic Sanctum of Domination)
+15163	 Guardian of the First Ones Kills (Mythic Sanctum of Domination)
+
+15164	 Fatescribe Roh-Kalo Kills (Raid Finder Sanctum of Domination)
+15165	 Fatescribe Roh-Kalo Kills (Normal Sanctum of Domination)
+15166	 Fatescribe Roh-Kalo Kills (Heroic Sanctum of Domination)
+15167	 Fatescribe Roh-Kalo Kills (Mythic Sanctum of Domination)
+
+15169	 Kel'Thuzad Kills (Raid Finder Sanctum of Domination)
+15170	 Kel'Thuzad Kills (Normal Sanctum of Domination)
+15171	 Kel'Thuzad Kills (Heroic Sanctum of Domination)
+15172	 Kel'Thuzad Kills (Mythic Sanctum of Domination)
+
+15173	 Sylvanas Windrunner Kills (Raid Finder Sanctum of Domination)
+15174	 Sylvanas Windrunner Kills (Normal Sanctum of Domination)
+15175	 Sylvanas Windrunner Kills (Heroic Sanctum of Domination)
+15176	 Sylvanas Windrunner Kills (Mythic Sanctum of Domination)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
