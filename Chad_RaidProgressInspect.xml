@@ -1,45 +1,237 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
 	<Script file="Chad_RaidProgressInspect.lua"/>
-	<Frame name="II_RaidProgressFrame" enableMouse="true" parent="InspectFrame" hidden="true" useParentLevel="true" setAllPoints="true" id="6">
+	<Frame name="RaidProgressButtonTemplate" mixin="RaidProgressInspectDisplayMixin" virtual="true">
+		<Size x="300" y="70"/>
+		<Layers>
+			<Layer level="BORDER" >
+				<FontString parentKey="raidDifficultyLabel" inherits="GameFontHighlight">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="7" y="-8"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="raidMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="raidCurrentProg" inherits="SystemFont_Huge1_Outline">
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="backTexture" atlas="pvpqueue-button-up"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" y="-100"/>
+				</Anchors>
+			</Layer>
+		</Layers>
+		<Frames>
+			<StatusBar parentKey="bossProgressBar" drawLayer="ARTWORK">
+				<Size x="150" y="30"/>
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="CENTER" x="-10" y="-5"/>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1" b="0.10"/>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture parentKey="Background">
+							<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+							<Color r="0.6" g="0.20" b="0.20" a="0.65"/>
+						</Texture>
+					</Layer>
+				</Layers>
+			</StatusBar>
+		</Frames>
+	</Frame>
+
+	<Frame name="II_RaidProgressFrame" enableMouse="true" parent="InspectFrame" mixin="RaidProgressInspectLayoutMixin" hidden="true" useParentLevel="true" setAllPoints="true" id="6">
 		<Size x="300" y="500" />
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture parentKey="BG" file="Interface\ENCOUNTERJOURNAL\UI-EJ-BACKGROUND-SanctumofDomination">
-					<Size x="320" y="355"/>
+					<Size x="425" y="425"/>
 					<Anchors>
-						<Anchor point="TOPLEFT" x="8" y="-64"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-			<Layer level="ARTWORK">
-				<FontString parentKey="HKs" inherits="GameFontHighlight">
-					<Anchors>
-						<Anchor point="TOP" x="0" y="-36"/>
-					</Anchors>
-				</FontString>
-				<Texture parentKey="PortraitBackground" hidden="true">
-					<Size x="60" y="60"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="InspectFrame" relativePoint="TOPLEFT" x="-6" y="7" />
-					</Anchors>
-				</Texture>
-				<FontString parentKey="HonorLevel" inherits="GameFontNormalLarge">
-					<Anchors>
-						<Anchor point="TOP" x="0" y="-84"/>
-					</Anchors>
-				</FontString>
-			</Layer>
-			<Layer level="OVERLAY" textureSubLevel="1">
-				<Texture parentKey="SmallWreath" atlas="honorsystem-prestige-smallwreath" useAtlasSize="false" hidden="true">
-					<Size x="73" y="43"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="InspectFrame" relativePoint="TOPLEFT" x="-12" y="-19" />
+						<Anchor point="TOPLEFT" x="8" y="-60"/>
 					</Anchors>
 				</Texture>
 			</Layer>
 		</Layers>
+		<Frames>
+			<Frame name="InspectRaidProgressBoxFrame">
+				<Size x="300" y="325" />
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" relativePoint="TOP" y="-95"/>
+				</Anchors>
+			</Frame>		
+			<Frame parentKey="RaidListDropDown" inherits="UIDropDownMenuTemplate" mixin="RaidDropdownMixin" virtual="true">
+				<Size x="200" y="40"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" relativePoint="TOP" x="100" y="-65"/>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentRaidLabel" inherits="GameFontHighlight" text="Sanctum">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="25" y="-6"/>
+								</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+		
 		<Scripts>
-			<OnLoad function="RaidProg_OnLoad"/>
+			<OnLoad method="OnLoad"/>
+			<OnShow method="OnShow"/>
 		</Scripts>
 	</Frame>
 </Ui>
+
+
+			<!-- <Button parentKey="LFRBossDisplay" >
+				<Size x="300" y="70"/>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="LFRRaidLabel" inherits="GameFontHighlight" text="LFR">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="7" y="-8"/>
+							</Anchors>
+						</FontString>
+						<FontString name="LFRMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
+							</Anchors>
+						</FontString>
+						<FontString name="LFRCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" y="-100"/>
+				</Anchors>
+			</Button>
+			<StatusBar parentKey="LFRBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
+				<Size x="150" y="30"/>
+				<Anchors>
+					<Anchor point="CENTER" relativeKey="$parent.LFRBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1" b="0.1"/>
+			</StatusBar>
+
+			<Button parentKey="NormalBossDisplay" >
+				<Size x="300" y="70"/>
+				<Layers>
+					<Layer level="ARTWORK" textureSubLevel="1">
+						<FontString name="$parentNormalRaidLabel" inherits="GameFontHighlight" text="Normal">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="7" y="-8"/>
+							</Anchors>
+						</FontString>
+						<FontString name="NormalMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
+							</Anchors>
+						</FontString>
+						<FontString name="NormalCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.LFRBossDisplay" relativePoint="BOTTOM" y="-10"/>
+				</Anchors>
+			</Button>
+			<StatusBar parentKey="NormalBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
+				<Size x="150" y="30"/>
+				<Anchors>
+					<Anchor point="CENTER" relativeKey="$parent.NormalBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1" b="0.1"/>
+			</StatusBar>
+
+			<Button parentKey="HeroicBossDisplay" >
+				<Size x="300" y="70"/>
+				<Layers>
+					<Layer level="ARTWORK" textureSubLevel="1">
+						<FontString name="$parentHeroicRaidLabel" inherits="GameFontHighlight" text="Heroic">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="7" y="-8"/>
+							</Anchors>
+						</FontString>
+						<FontString name="HeroicMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
+							</Anchors>
+						</FontString>
+						<FontString name="HeroicCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.NormalBossDisplay" relativePoint="BOTTOM" y="-10"/>
+				</Anchors>
+			</Button>
+			<StatusBar parentKey="HeroicBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
+				<Size x="150" y="30"/>
+				<Anchors>
+					<Anchor point="CENTER" relativeKey="$parent.HeroicBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1" b="0.1"/>
+			</StatusBar>
+
+			<Button parentKey="MythicBossDisplay" >
+				<Size x="300" y="70"/>
+				<Layers>
+					<Layer level="ARTWORK" textureSubLevel="1">
+						<FontString name="$parentMythicRaidLabel" inherits="GameFontHighlight" text="Mythic">
+							<Anchors>
+								<Anchor point="TOPLEFT" x="7" y="-8"/>
+							</Anchors>
+						</FontString>
+						<FontString name="MythicMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
+							</Anchors>
+						</FontString>
+						<FontString name="MythicCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
+							<Anchors>
+								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
+							</Anchors>
+						</FontString>						
+					</Layer>
+				</Layers>
+				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.HeroicBossDisplay" relativePoint="BOTTOM" y="-10"/>
+				</Anchors>
+			</Button>
+			<StatusBar parentKey="MythicBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
+				<Size x="150" y="30"/>
+				<Anchors>
+					<Anchor point="CENTER" relativeKey="$parent.MythicBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
+				</Anchors>
+				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
+				<BarColor r="0" g="1" b="0.1"/>
+			</StatusBar> -->
+

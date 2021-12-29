@@ -1,5 +1,6 @@
 ## RequiredDep: Blizzard_Communities
 ## RequiredDep: Blizzard_InspectUI
+## RequiredDep: Blizzard_PVPUI
 
 Chad_RaidCriteriaList.lua
 Chad_ImprovedInspect.xml
