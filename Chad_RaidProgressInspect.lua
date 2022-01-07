@@ -8,9 +8,18 @@ print("RaidProgress")
 -- Use this to find the amount of times a player has defeated a boss.
 -- GetComparisonStatistic(achievementID)
 -- GetComparisonStatistic(15136) LFR Tarragrue
+-- GetComparisonStatistic(15137)
+
+
+-- /run SetAchievementComparisonUnit("target")
+-- /run AchievementFrameComparison_SetUnit("target")
+-- /dump GetComparisonStatistic(15137)
+-- local quantity = GetAchievementCriteriaInfo(15137)
+-- print (quantity)
+-- /dump GetAchievementComparisonInfo(15137)
 
 -- I think this will set the inspect target and allow achievement comparison.
--- SetAchievementComparisonUnit(unit);
+-- SetAchievementComparisonUnit("target");
 
 -- inspectraidprog.SoD[1].bossName
 --                         RaidFinderKills
@@ -22,10 +31,12 @@ print("RaidProgress")
 -- This will set the status bars value
 -- II_RaidProgressFrame.LFRBossProgress:SetValue(##)
 
-local inspectRaidProg = {}
 local NUM_NATHRIA_BOSSES = 10
 local NUM_SANCTUM_BOSSES = 10
 
+local currentComparePlayer = nil;
+
+local inspectRaidProg = {}
 inspectRaidProg.CastleNathria = {
     ["LFR"] = {},
     ["Normal"] = {},
@@ -61,7 +72,6 @@ local RAID_LIST_DROPDOWN = {
 
 RaidDropdownMixin = {}
 
-RaidProgressInspectLayoutMixin = {}
 
 -- functions needed
 -- handle toggling raids (dropdown)
@@ -69,14 +79,28 @@ RaidProgressInspectLayoutMixin = {}
 -- bar setup
 -- Set values
 
+RaidProgressInspectLayoutMixin = {}
+
 function RaidProgressInspectLayoutMixin:OnLoad()
+    self:RegisterEvent("INSPECT_ACHIEVEMENT_READY");
 	self.InspectRaidDifficultyPool = CreateFramePool("Frame", InspectRaidProgressBoxFrame, "RaidProgressButtonTemplate");
-	-- self.InspectProgressBarPool = CreateFramePool("Frame", InspectScoreBoxFrame, "InspectDungeonIconFrameTemplate");
+end
+
+function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
+    if event == "INSPECT_ACHIEVEMENT_READY" then
+        local guid = ...;
+        if currentComparePlayer ~= guid then
+            currentComparePlayer = guid
+            self:BuildSanctumTable()
+            -- self:BuildCastleTable()
+        end
+    end
 end
 
 function RaidProgressInspectLayoutMixin:OnShow()
-    -- self:BuildCastleTable()
-    self:BuildSanctumTable()
+    print("Show")
+    ClearAchievementComparisonUnit()
+    SetAchievementComparisonUnit("target")
 end
 
 function RaidProgressInspectLayoutMixin:BuildCastleTable()
@@ -84,18 +108,9 @@ function RaidProgressInspectLayoutMixin:BuildCastleTable()
     self.lastOption = nil
     self.InspectRaidDifficultyPool:ReleaseAll();
 
-    -- for i = 1, NUM_NATHRIA_BOSSES do
-    --     local name = EJ_GetEncounterInfoByIndex(i, true)
-    --     inspectRaidProg.CastleNathria[name] = {}
-    --     inspectRaidProg.CastleNathria[name].LFR = GetStatistic(CastleNathriaCriteriaID[name].LFR); -- GetComparisonStatistic(achievementID)
-    --     inspectRaidProg.CastleNathria[name].Normal = GetStatistic(CastleNathriaCriteriaID[name].Normal);
-    --     inspectRaidProg.CastleNathria[name].Heroic = GetStatistic(CastleNathriaCriteriaID[name].Heroic);
-    --     inspectRaidProg.CastleNathria[name].Mythic = GetStatistic(CastleNathriaCriteriaID[name].Mythic);
-    -- end
-
     for i = 1, NUM_NATHRIA_BOSSES do
         local name = EJ_GetEncounterInfoByIndex(i, true)
-        inspectRaidProg.CastleNathria["LFR"][name] = GetStatistic(CastleNathriaCriteriaID[name].LFR); -- GetComparisonStatistic(achievementID)
+        inspectRaidProg.CastleNathria["LFR"][name] = GetStatistic(CastleNathriaCriteriaID[name].LFR); -- GetStatistic(achievementID)
         inspectRaidProg.CastleNathria["Normal"][name] = GetStatistic(CastleNathriaCriteriaID[name].Normal);
         inspectRaidProg.CastleNathria["Heroic"][name] = GetStatistic(CastleNathriaCriteriaID[name].Heroic);
         inspectRaidProg.CastleNathria["Mythic"][name] = GetStatistic(CastleNathriaCriteriaID[name].Mythic);
@@ -106,88 +121,23 @@ end
 
 function RaidProgressInspectLayoutMixin:BuildSanctumTable ()
     EJ_SelectInstance(1193)
-    SetAchievementComparisonUnit("target")
     self.lastOption = nil
     self.InspectRaidDifficultyPool:ReleaseAll();
 
-    -- for i = 1, NUM_SANCTUM_BOSSES do
-    --     local name, _, encounterID = EJ_GetEncounterInfoByIndex(i, true)
-    --     inspectRaidProg.Sanctum[name] = {}
-    --     inspectRaidProg.Sanctum[name].LFR = GetStatistic(SanctumOfDominationCriteriaID[name].LFR);
-    --     inspectRaidProg.Sanctum[name].Normal = GetStatistic(SanctumOfDominationCriteriaID[name].Normal);
-    --     inspectRaidProg.Sanctum[name].Heroic = GetStatistic(SanctumOfDominationCriteriaID[name].Heroic);
-    --     inspectRaidProg.Sanctum[name].Mythic = GetStatistic(SanctumOfDominationCriteriaID[name].Mythic);
-    -- end
-
     for i = 1, NUM_SANCTUM_BOSSES do
         local name = EJ_GetEncounterInfoByIndex(i, true)
-        -- inspectRaidProg.Sanctum["LFR"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].LFR);
-        -- inspectRaidProg.Sanctum["Normal"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].Normal);
-        -- inspectRaidProg.Sanctum["Heroic"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].Heroic);
-        -- inspectRaidProg.Sanctum["Mythic"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].Mythic);
 
-        inspectRaidProg.Sanctum["LFR"][name] = GetComparisonStatistic(SanctumOfDominationCriteriaID[name].LFR);
+        inspectRaidProg.Sanctum["LFR"][name] = GetComparisonStatistic(SanctumOfDominationCriteriaID[name].LFR); -- GetStatistic(achievementID)
         inspectRaidProg.Sanctum["Normal"][name] = GetComparisonStatistic(SanctumOfDominationCriteriaID[name].Normal);
         inspectRaidProg.Sanctum["Heroic"][name] = GetComparisonStatistic(SanctumOfDominationCriteriaID[name].Heroic);
         inspectRaidProg.Sanctum["Mythic"][name] = GetComparisonStatistic(SanctumOfDominationCriteriaID[name].Mythic);
-
-        -- /run SetAchievementComparisonUnit("target")
-        -- /run AchievementFrameComparison_SetUnit("target")
-        -- /dump GetComparisonStatistic(15137)
-        -- local quantity = GetAchievementCriteriaInfo(15137)
-        -- print (quantity)
-        -- /dump GetAchievementComparisonInfo(15137)
     end
-
-    -- for difficulty, option in pairs(inspectRaidProg.Sanctum) do
-    --     inspectRaidProg.Sanctum[difficulty].bossProgress = -1
-    -- end
-
-    -- for bossname, option in pairs(inspectRaidProg.Sanctum["LFR"]) do
-    --     if (inspectRaidProg.Sanctum["LFR"][bossname] ~= "--") then
-    --         inspectRaidProg.Sanctum["LFR"].bossProgress = inspectRaidProg.Sanctum["LFR"].bossProgress + 1
-    --     end
-    -- end
-
-    -- for bossname, option in pairs(inspectRaidProg.Sanctum["Normal"]) do 
-    --     if (inspectRaidProg.Sanctum["Normal"][bossname] ~= "--") then
-    --         inspectRaidProg.Sanctum["Normal"].bossProgress = inspectRaidProg.Sanctum["Normal"].bossProgress + 1
-    --     end
-    -- end
-
-    -- for bossname, option in pairs(inspectRaidProg.Sanctum["Heroic"]) do 
-    --     if (inspectRaidProg.Sanctum["Heroic"][bossname] ~= "--") then
-    --         inspectRaidProg.Sanctum["Heroic"].bossProgress = inspectRaidProg.Sanctum["Heroic"].bossProgress + 1
-    --     end
-    -- end
-
-    -- for bossname, option in pairs(inspectRaidProg.Sanctum["Mythic"]) do 
-    --     if (inspectRaidProg.Sanctum["Mythic"][bossname] ~= "--") then
-    --         inspectRaidProg.Sanctum["Mythic"].bossProgress = inspectRaidProg.Sanctum["Mythic"].bossProgress + 1
-    --     end
-    -- end
-
-    -- for bossname, option in pairs(inspectRaidProg.Sanctum) do 
-    --     if (inspectRaidProg.Sanctum[bossname].LFR > "0") then
-    --         inspectRaidProg.Sanctum["BossProgress"].LFR = inspectRaidProg.Sanctum["BossProgress"].LFR + 1
-    --     end
-        -- if (inspectRaidProg.Sanctum["Normal"][bossname] > "0") then
-        --     inspectRaidProg.Sanctum["Normal"].bossProgress = inspectRaidProg.Sanctum["Normal"].bossProgress + 1
-        -- end
-    --     if (inspectRaidProg.Sanctum[bossname].Heroic > "0") then
-    --         inspectRaidProg.Sanctum["BossProgress"].Heroic = inspectRaidProg.Sanctum["BossProgress"].Heroic + 1
-    --     end
-    --     if (inspectRaidProg.Sanctum[bossname].Mythic > "0") then
-    --         inspectRaidProg.Sanctum["BossProgress"].Mythic = inspectRaidProg.Sanctum["BossProgress"].Mythic + 1
-    --     end
-    -- end
 
     for index, option in pairs(inspectRaidProg.Sanctum) do
         self.lastOption = self:SetupDifficultyDisplays(index, option);
     end
 
-    -- print(inspectRaidProg.Sanctum["Normal"].bossProgress)
-    TestPrintMatrix()
+    -- TestPrintMatrix()
 end
 
 function RaidProgressInspectLayoutMixin:SetupDifficultyDisplays(raidDifficulty, bossInfo)
@@ -204,11 +154,24 @@ function RaidProgressInspectLayoutMixin:SetupDifficultyDisplays(raidDifficulty, 
 	return inspectRaidDifficultyDisplay;
 end
 
+function RaidProgressInspectLayoutMixin:OnHide()
+    for i, v in ipairs(inspectRaidProg.CastleNathria) do 
+        for boss, blank in pairs(inspectRaidProg.CastleNathria[i]) do
+            inspectRaidProg.CastleNathria[i][boss] = nil
+        end
+    end
+    for i, v in ipairs(inspectRaidProg.Sanctum) do 
+        for boss, blank in pairs(inspectRaidProg.Sanctum[i]) do
+            inspectRaidProg.Sanctum[i][boss] = nil
+        end
+    end
+end
+
 RaidProgressInspectDisplayMixin = {}
 
 function RaidProgressInspectDisplayMixin:ProgressSetUp(raidDifficulty, bossInfo)
     local totalBossKills = 0;
-
+    
     for bossname, option in pairs(inspectRaidProg.Sanctum[raidDifficulty]) do
         if (option ~= "--") then
             totalBossKills = totalBossKills + 1
@@ -217,7 +180,6 @@ function RaidProgressInspectDisplayMixin:ProgressSetUp(raidDifficulty, bossInfo)
 
     self.raidDifficultyLabel:SetText(raidDifficulty);
     self.raidCurrentProg:SetText(totalBossKills);
-
     self.bossProgressBar:SetMinMaxValues(0, NUM_SANCTUM_BOSSES);
     self.bossProgressBar:SetValue(totalBossKills);
 
@@ -232,8 +194,6 @@ function TestPrintMatrix()
         end
     end
 end
-
-
 
 -- Stuff for when I get to doing the raid dropdown      ----
 -- local RaidProgressInspectDropdown;
@@ -303,3 +263,72 @@ end
 -- 	info.tooltipText = OPTION_TOOLTIP_AUTO_SELF_CAST_ALT_KEY;
 -- 	UIDropDownMenu_AddButton(info);
 -- end
+
+
+
+    -- for i = 1, NUM_NATHRIA_BOSSES do
+    --     local name = EJ_GetEncounterInfoByIndex(i, true)
+    --     inspectRaidProg.CastleNathria[name] = {}
+    --     inspectRaidProg.CastleNathria[name].LFR = GetStatistic(CastleNathriaCriteriaID[name].LFR); -- GetComparisonStatistic(achievementID)
+    --     inspectRaidProg.CastleNathria[name].Normal = GetStatistic(CastleNathriaCriteriaID[name].Normal);
+    --     inspectRaidProg.CastleNathria[name].Heroic = GetStatistic(CastleNathriaCriteriaID[name].Heroic);
+    --     inspectRaidProg.CastleNathria[name].Mythic = GetStatistic(CastleNathriaCriteriaID[name].Mythic);
+    -- end
+
+        -- for i = 1, NUM_SANCTUM_BOSSES do
+    --     local name, _, encounterID = EJ_GetEncounterInfoByIndex(i, true)
+    --     inspectRaidProg.Sanctum[name] = {}
+    --     inspectRaidProg.Sanctum[name].LFR = GetStatistic(SanctumOfDominationCriteriaID[name].LFR);
+    --     inspectRaidProg.Sanctum[name].Normal = GetStatistic(SanctumOfDominationCriteriaID[name].Normal);
+    --     inspectRaidProg.Sanctum[name].Heroic = GetStatistic(SanctumOfDominationCriteriaID[name].Heroic);
+    --     inspectRaidProg.Sanctum[name].Mythic = GetStatistic(SanctumOfDominationCriteriaID[name].Mythic);
+    -- end
+        -- inspectRaidProg.Sanctum["LFR"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].LFR);
+        -- inspectRaidProg.Sanctum["Normal"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].Normal);
+        -- inspectRaidProg.Sanctum["Heroic"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].Heroic);
+        -- inspectRaidProg.Sanctum["Mythic"][name] = GetStatistic(SanctumOfDominationCriteriaID[name].Mythic);
+
+
+
+    -- for difficulty, option in pairs(inspectRaidProg.Sanctum) do
+    --     inspectRaidProg.Sanctum[difficulty].bossProgress = -1
+    -- end
+
+    -- for bossname, option in pairs(inspectRaidProg.Sanctum["LFR"]) do
+    --     if (inspectRaidProg.Sanctum["LFR"][bossname] ~= "--") then
+    --         inspectRaidProg.Sanctum["LFR"].bossProgress = inspectRaidProg.Sanctum["LFR"].bossProgress + 1
+    --     end
+    -- end
+
+    -- for bossname, option in pairs(inspectRaidProg.Sanctum["Normal"]) do 
+    --     if (inspectRaidProg.Sanctum["Normal"][bossname] ~= "--") then
+    --         inspectRaidProg.Sanctum["Normal"].bossProgress = inspectRaidProg.Sanctum["Normal"].bossProgress + 1
+    --     end
+    -- end
+
+    -- for bossname, option in pairs(inspectRaidProg.Sanctum["Heroic"]) do 
+    --     if (inspectRaidProg.Sanctum["Heroic"][bossname] ~= "--") then
+    --         inspectRaidProg.Sanctum["Heroic"].bossProgress = inspectRaidProg.Sanctum["Heroic"].bossProgress + 1
+    --     end
+    -- end
+
+    -- for bossname, option in pairs(inspectRaidProg.Sanctum["Mythic"]) do 
+    --     if (inspectRaidProg.Sanctum["Mythic"][bossname] ~= "--") then
+    --         inspectRaidProg.Sanctum["Mythic"].bossProgress = inspectRaidProg.Sanctum["Mythic"].bossProgress + 1
+    --     end
+    -- end
+
+    -- for bossname, option in pairs(inspectRaidProg.Sanctum) do 
+    --     if (inspectRaidProg.Sanctum[bossname].LFR > "0") then
+    --         inspectRaidProg.Sanctum["BossProgress"].LFR = inspectRaidProg.Sanctum["BossProgress"].LFR + 1
+    --     end
+        -- if (inspectRaidProg.Sanctum["Normal"][bossname] > "0") then
+        --     inspectRaidProg.Sanctum["Normal"].bossProgress = inspectRaidProg.Sanctum["Normal"].bossProgress + 1
+        -- end
+    --     if (inspectRaidProg.Sanctum[bossname].Heroic > "0") then
+    --         inspectRaidProg.Sanctum["BossProgress"].Heroic = inspectRaidProg.Sanctum["BossProgress"].Heroic + 1
+    --     end
+    --     if (inspectRaidProg.Sanctum[bossname].Mythic > "0") then
+    --         inspectRaidProg.Sanctum["BossProgress"].Mythic = inspectRaidProg.Sanctum["BossProgress"].Mythic + 1
+    --     end
+    -- end

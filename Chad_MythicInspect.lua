@@ -11,6 +11,8 @@ function MythicScoreInspectLayoutMixin:OnLoad()
 	self.InspectDungeonsPool = CreateFramePool("Frame", InspectScoreBoxFrame, "InspectDungeonIconFrameTemplate");
 end
 
+
+
 function MythicScoreInspectLayoutMixin:OnShow()
     if not self.maps then
         self.maps = C_ChallengeMode.GetMapTable();
