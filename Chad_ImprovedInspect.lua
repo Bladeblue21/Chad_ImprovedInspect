@@ -28,6 +28,11 @@ function SwitchImprovedInspectTabs(id)
 
 	if ( newFrame ) then
 		if ( oldFrame ) then
+			if(currentTab == 5) then
+				ImprovedInspectFrameTab1:SetChecked(false);
+			elseif (currentTab == 6) then
+				ImprovedInspectFrameTab2:SetChecked(false);
+			end
 			oldFrame:Hide();
 		end
 		
@@ -45,6 +50,7 @@ function ImprovedInspect_OnHide (self)
 	ImprovedInspectFrameTab1:SetChecked(false);
 	II_RaidProgressFrame:Hide();
 	ImprovedInspectFrameTab2:SetChecked(false);
+
 	currentTab = nil;
 end
 

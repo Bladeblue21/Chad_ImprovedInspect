@@ -24,7 +24,7 @@
                 </Anchors>
 				<Scripts>
 					<OnLoad>
-						self.Icon:SetTexture("Interface\\ENCOUNTERJOURNAL\\UI-EJ-HeroicTextIcon");
+						self.Icon:SetTexture("Interface\\ICONS\\Spell_Shadow_SoulLeech_1");
 					</OnLoad>
 					<OnClick function="ImprovedInspect_OnClick"/>
 				</Scripts>

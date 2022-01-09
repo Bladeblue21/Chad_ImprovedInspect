@@ -51,7 +51,7 @@
 		<Size x="300" y="500" />
 		<Layers>
 			<Layer level="BACKGROUND">
-				<Texture parentKey="BG" file="Interface\ENCOUNTERJOURNAL\UI-EJ-BACKGROUND-SanctumofDomination">
+				<Texture parentKey="BG">
 					<Size x="425" y="425"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" x="8" y="-60"/>
@@ -66,24 +66,16 @@
 					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" relativePoint="TOP" y="-95"/>
 				</Anchors>
 			</Frame>		
-			<Frame parentKey="RaidListDropDown" inherits="UIDropDownMenuTemplate" mixin="RaidDropdownMixin" virtual="true">
-				<Size x="200" y="40"/>
+			<Frame name="RaidListDropDown" inherits="UIDropDownMenuTemplate" id="1">
 				<Anchors>
-					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" relativePoint="TOP" x="100" y="-65"/>
+					<Anchor point="TOPLEFT" x="145" y="-65"/>
 				</Anchors>
-				<Layers>
-					<Layer level="OVERLAY">
-						<FontString name="$parentRaidLabel" inherits="GameFontHighlight" text="Sanctum">
-							<Anchors>
-								<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
-								<Offset>
-									<AbsDimension x="25" y="-6"/>
-								</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
+				<Scripts>
+					<OnShow>
+						UIDropDownMenu_SetWidth(self, 135);
+						UIDropDownMenu_JustifyText(self, "LEFT");
+					</OnShow>
+				</Scripts>
 			</Frame>
 		</Frames>
 		
@@ -92,148 +84,10 @@
 			<OnShow method="OnShow"/>
 			<OnEvent method="OnEvent"/>
 			<OnHide method="OnHide"/>
+			<OnUpdate method="OnUpdate"/>
 		</Scripts>
 	</Frame>
 </Ui>
 
 
-			<!-- <Button parentKey="LFRBossDisplay" >
-				<Size x="300" y="70"/>
-				<Layers>
-					<Layer level="OVERLAY">
-						<FontString name="LFRRaidLabel" inherits="GameFontHighlight" text="LFR">
-							<Anchors>
-								<Anchor point="TOPLEFT" x="7" y="-8"/>
-							</Anchors>
-						</FontString>
-						<FontString name="LFRMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
-							</Anchors>
-						</FontString>
-						<FontString name="LFRCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
-				<Anchors>
-					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" y="-100"/>
-				</Anchors>
-			</Button>
-			<StatusBar parentKey="LFRBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
-				<Size x="150" y="30"/>
-				<Anchors>
-					<Anchor point="CENTER" relativeKey="$parent.LFRBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
-				</Anchors>
-				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
-				<BarColor r="0" g="1" b="0.1"/>
-			</StatusBar>
-
-			<Button parentKey="NormalBossDisplay" >
-				<Size x="300" y="70"/>
-				<Layers>
-					<Layer level="ARTWORK" textureSubLevel="1">
-						<FontString name="$parentNormalRaidLabel" inherits="GameFontHighlight" text="Normal">
-							<Anchors>
-								<Anchor point="TOPLEFT" x="7" y="-8"/>
-							</Anchors>
-						</FontString>
-						<FontString name="NormalMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
-							</Anchors>
-						</FontString>
-						<FontString name="NormalCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
-				<Anchors>
-					<Anchor point="TOP" relativeKey="$parent.LFRBossDisplay" relativePoint="BOTTOM" y="-10"/>
-				</Anchors>
-			</Button>
-			<StatusBar parentKey="NormalBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
-				<Size x="150" y="30"/>
-				<Anchors>
-					<Anchor point="CENTER" relativeKey="$parent.NormalBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
-				</Anchors>
-				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
-				<BarColor r="0" g="1" b="0.1"/>
-			</StatusBar>
-
-			<Button parentKey="HeroicBossDisplay" >
-				<Size x="300" y="70"/>
-				<Layers>
-					<Layer level="ARTWORK" textureSubLevel="1">
-						<FontString name="$parentHeroicRaidLabel" inherits="GameFontHighlight" text="Heroic">
-							<Anchors>
-								<Anchor point="TOPLEFT" x="7" y="-8"/>
-							</Anchors>
-						</FontString>
-						<FontString name="HeroicMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
-							</Anchors>
-						</FontString>
-						<FontString name="HeroicCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
-				<Anchors>
-					<Anchor point="TOP" relativeKey="$parent.NormalBossDisplay" relativePoint="BOTTOM" y="-10"/>
-				</Anchors>
-			</Button>
-			<StatusBar parentKey="HeroicBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
-				<Size x="150" y="30"/>
-				<Anchors>
-					<Anchor point="CENTER" relativeKey="$parent.HeroicBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
-				</Anchors>
-				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
-				<BarColor r="0" g="1" b="0.1"/>
-			</StatusBar>
-
-			<Button parentKey="MythicBossDisplay" >
-				<Size x="300" y="70"/>
-				<Layers>
-					<Layer level="ARTWORK" textureSubLevel="1">
-						<FontString name="$parentMythicRaidLabel" inherits="GameFontHighlight" text="Mythic">
-							<Anchors>
-								<Anchor point="TOPLEFT" x="7" y="-8"/>
-							</Anchors>
-						</FontString>
-						<FontString name="MythicMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
-							</Anchors>
-						</FontString>
-						<FontString name="MythicCurrentProg" inherits="SystemFont_Huge1_Outline" text="10">
-							<Anchors>
-								<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
-							</Anchors>
-						</FontString>						
-					</Layer>
-				</Layers>
-				<NormalTexture parentKey="NormalTexture" atlas="pvpqueue-button-up"/>
-				<Anchors>
-					<Anchor point="TOP" relativeKey="$parent.HeroicBossDisplay" relativePoint="BOTTOM" y="-10"/>
-				</Anchors>
-			</Button>
-			<StatusBar parentKey="MythicBossProgress" minValue="0" maxValue="100" drawLayer="OVERLAY" virtual="true">
-				<Size x="150" y="30"/>
-				<Anchors>
-					<Anchor point="CENTER" relativeKey="$parent.MythicBossDisplay" relativePoint="CENTER" x="-10" y="-5"/>
-				</Anchors>
-				<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
-				<BarColor r="0" g="1" b="0.1"/>
-			</StatusBar> -->
 
