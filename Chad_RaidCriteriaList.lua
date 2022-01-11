@@ -8,10 +8,10 @@
 CastleNathriaCriteriaID = {}
 
 CastleNathriaCriteriaID["Shriekwing"] = {}
-CastleNathriaCriteriaID["Shriekwing"].LFR = 14419
+CastleNathriaCriteriaID["Shriekwing"].LFR = 14422
 CastleNathriaCriteriaID["Shriekwing"].Normal = 14419
-CastleNathriaCriteriaID["Shriekwing"].Heroic = 14419
-CastleNathriaCriteriaID["Shriekwing"].Mythic = 14419
+CastleNathriaCriteriaID["Shriekwing"].Heroic = 14420
+CastleNathriaCriteriaID["Shriekwing"].Mythic = 14421
 
 CastleNathriaCriteriaID["Huntsman Altimor"] = {}
 CastleNathriaCriteriaID["Huntsman Altimor"].LFR = 14426

@@ -85,8 +85,4 @@
 			<OnHide function="MythicInspect_OnHide"/>
 		</Scripts>
 	</Frame>
-
-	
-
-	
 </Ui>
