@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "Chad_ImprovedInspect",
+			"path": "."
+		},
+		{
+			"name": "Interface",
+			"path": "..\\..\\..\\BlizzardInterfaceCode\\Interface"
+		}
+	],
+	"settings": {}
+}

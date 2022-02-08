@@ -6,31 +6,12 @@
 
 local currentComparePlayer = nil;
 
-local inspectRaidProgress = {
-    ["Castle Nathria"] = {
-        ["LFR"] = {},
-        ["Normal"] = {},
-        ["Heroic"] = {},
-        ["Mythic"] = {},
-    },
-
-    ["Sanctum of Domination"] = {
-        ["LFR"] = {},
-        ["Normal"] = {},
-        ["Heroic"] = {},
-        ["Mythic"] = {},
-    }
-
-    --Placeholder for 9.2 Raid
-    -- ["The First Ones"] = {
-    --     ["LFR"] = {},
-    --     ["Normal"] = {},
-    --     ["Heroic"] = {},
-    --     ["Mythic"] = {},
-    -- }
+local raidDifficultyList = {
+    [1] = "LFR",
+    [2] = "Normal",
+    [3] = "Heroic",
+    [4] = "Mythic"
 }
-
-
 
 local RAID_LIST_DROPDOWN = {
     ["Castle Nathria"] = {
@@ -38,7 +19,8 @@ local RAID_LIST_DROPDOWN = {
         numRaidBosses = 10,
         backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-CastleNathria",
         EJInstanceID = 1190,
-        criteriaIDList = CastleNathriaCriteriaID
+        criteriaIDList = CastleNathriaCriteriaID,
+        raidProgress = {}
     };
 
     ["Sanctum of Domination"] = {
@@ -46,7 +28,8 @@ local RAID_LIST_DROPDOWN = {
         numRaidBosses = 10,
         backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-SanctumofDomination",
         EJInstanceID = 1193,
-        criteriaIDList = SanctumOfDominationCriteriaID
+        criteriaIDList = SanctumOfDominationCriteriaID,        
+        raidProgress = {}
     };
 
     --Placeholder for 9.2 Raid
@@ -76,7 +59,6 @@ function RaidProgressDropdown_SelectRaid(button)
     II_RaidProgressFrame:BuildRaidProgressTable(selectedRaid)
     II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[selectedRaid].backgroundTexture);
 end
-
 
 
 RaidProgressInspectLayoutMixin = {}
@@ -113,18 +95,16 @@ function RaidProgressInspectLayoutMixin:BuildRaidProgressTable(selectedRaid)
     self.lastOption = nil
     self.InspectRaidDifficultyPool:ReleaseAll();
 
-    EJ_SelectInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
+    for raidTypeIndex, raidTypeName in ipairs (raidDifficultyList) do 
+        RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidTypeName] = {};
 
-    for i = 1, RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses do
-        local name = EJ_GetEncounterInfoByIndex(i, true)
-        inspectRaidProgress[selectedRaid]["LFR"][name] = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name].LFR); -- GetStatistic(achievementID)
-        inspectRaidProgress[selectedRaid]["Normal"][name] = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name].Normal); --GetComparisonStatistic(achievementID)
-        inspectRaidProgress[selectedRaid]["Heroic"][name] = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name].Heroic);
-        inspectRaidProgress[selectedRaid]["Mythic"][name] = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name].Mythic);
-    end
+        for i = 1, RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses do
+            local name = EJ_GetEncounterInfoByIndex(i, RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
+            local statKillInfo = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name][raidTypeName]);
+            RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidTypeName][name] = statKillInfo;
+        end
 
-    for index, option in pairs(inspectRaidProgress[selectedRaid]) do
-        self.lastOption = self:SetupDifficultyDisplays(index, option, selectedRaid);
+        self.lastOption = self:SetupDifficultyDisplays(raidTypeName, RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidTypeName], selectedRaid);
     end
 end
 
@@ -149,7 +129,7 @@ RaidProgressInspectDisplayMixin = {}
 function RaidProgressInspectDisplayMixin:ProgressSetUp(raidDifficulty, bossInfo, selectedRaid)
     local totalBossKills = 0;
 
-    for bossname, statValue in pairs(inspectRaidProgress[selectedRaid][raidDifficulty]) do
+    for bossname, statValue in pairs(RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty]) do
         if (statValue ~= "--") then
             totalBossKills = totalBossKills + 1
         end
