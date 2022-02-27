@@ -61,7 +61,7 @@
 			<Layer level="ARTWORK">
 				<FontString parentKey="Title" justifyV="TOP" inherits="SystemFont22_Shadow_Outline" text="DUNGEON_SCORE">
 					<Anchors>
-						<Anchor point="CENTER" x="0" y="75"/>
+						<Anchor point="CENTER" x="0" y="90"/>
 					</Anchors>
 				</FontString>
 				<FontString parentKey="Score" justifyV="TOP" inherits="SystemFont_Shadow_Huge2_Outline">
@@ -75,7 +75,7 @@
 			<Frame name="InspectScoreBoxFrame">
 				<Size x="300" y="150" />
 				<Anchors>
-					<Anchor point="BOTTOM" relativeKey="$parent.II_MythicScoreFrame" relativePoint="BOTTOM" y="50"/>
+					<Anchor point="BOTTOM" relativeKey="$parent.II_MythicScoreFrame" relativePoint="BOTTOM" y="90"/>
 				</Anchors>
 			</Frame>
 		</Frames>

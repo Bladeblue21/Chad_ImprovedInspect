@@ -58,7 +58,7 @@ function MythicScoreInspectLayoutMixin:GetMythicScoreInfo(index, optionInfo)
 		inspectDungeonScoreDisplay:SetPoint("TOPLEFT", InspectScoreBoxFrame); 
 		self.previousRowOption = inspectDungeonScoreDisplay; 
 	elseif (mod(index - 1, MAX_DUNGEONS_IN_ROWS) == 0) then 
-		inspectDungeonScoreDisplay:SetPoint("TOP", self.previousRowOption, "BOTTOM", 0, -20);
+		inspectDungeonScoreDisplay:SetPoint("TOP", self.previousRowOption, "BOTTOM", 0, -15);
 		self.previousRowOption = inspectDungeonScoreDisplay; 
 	else 
 		inspectDungeonScoreDisplay:SetPoint("LEFT", self.lastOption, "RIGHT", 15, 0);

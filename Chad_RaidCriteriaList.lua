@@ -132,3 +132,78 @@ SanctumOfDominationCriteriaID["Sylvanas Windrunner"].LFR = 15173
 SanctumOfDominationCriteriaID["Sylvanas Windrunner"].Normal = 15174
 SanctumOfDominationCriteriaID["Sylvanas Windrunner"].Heroic = 15175
 SanctumOfDominationCriteriaID["Sylvanas Windrunner"].Mythic = 15176
+
+
+
+
+
+SepulcerOfTheFirstOnesCriteriaID = {}
+
+SepulcerOfTheFirstOnesCriteriaID["Vigilant Guardian"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Vigilant Guardian"].LFR = 15424	--Vigilant Guardian (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Vigilant Guardian"].Normal = 15425	--Vigilant Guardian (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Vigilant Guardian"].Heroic = 15426	--Vigilant Guardian (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Vigilant Guardian"].Mythic = 15427	--Vigilant Guardian (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Skolex, the Insatiable Ravener"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Skolex, the Insatiable Ravener"].LFR = 15428	--Skolex (Raid Finder Sepulcher of the First Ones)	
+SepulcerOfTheFirstOnesCriteriaID["Skolex, the Insatiable Ravener"].Normal = 15429	--Skolex (Normal Sepulcher of the First Ones)	
+SepulcerOfTheFirstOnesCriteriaID["Skolex, the Insatiable Ravener"].Heroic = 15430	--Skolex (Heroic Sepulcher of the First Ones)	
+SepulcerOfTheFirstOnesCriteriaID["Skolex, the Insatiable Ravener"].Mythic = 15431	--Skolex (Mythic Sepulcher of the First Ones)	
+
+SepulcerOfTheFirstOnesCriteriaID["Artificer Xy'mox"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Artificer Xy'mox"].LFR = 15432	--Artificer Xy'mox (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Artificer Xy'mox"].Normal = 15433	--Artificer Xy'mox (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Artificer Xy'mox"].Heroic = 15434	--Artificer Xy'mox (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Artificer Xy'mox"].Mythic = 15435	--Artificer Xy'mox (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Dausegne, the Fallen Oracle"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Dausegne, the Fallen Oracle"].LFR = 15436	--Dausegne (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Dausegne, the Fallen Oracle"].Normal = 15437	--Dausegne (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Dausegne, the Fallen Oracle"].Heroic = 15438	--Dausegne (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Dausegne, the Fallen Oracle"].Mythic = 15439	--Dausegne (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Prototype Pantheon"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Prototype Pantheon"].LFR = 15440	--Prototype Pantheon (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Prototype Pantheon"].Normal = 15441	--Prototype Pantheon (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Prototype Pantheon"].Heroic = 15442	--Prototype Pantheon (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Prototype Pantheon"].Mythic = 15443	--Prototype Pantheon (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Lihuvim, Principal Architect"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Lihuvim, Principal Architect"].LFR = 15444	--Lihuvim (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Lihuvim, Principal Architect"].Normal = 15445	--Lihuvim (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Lihuvim, Principal Architect"].Heroic = 15446	--Lihuvim (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Lihuvim, Principal Architect"].Mythic = 15447	--Lihuvim (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Halondrus the Reclaimer"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Halondrus the Reclaimer"].LFR = 15448	--Halondrus (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Halondrus the Reclaimer"].Normal = 15449	--Halondrus (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Halondrus the Reclaimer"].Heroic = 15450	--Halondrus (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Halondrus the Reclaimer"].Mythic = 15451	--Halondrus (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Anduin Wrynn"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Anduin Wrynn"].LFR = 15452  --Anduin (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Anduin Wrynn"].Normal = 15453	--Anduin (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Anduin Wrynn"].Heroic = 15454	--Anduin (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Anduin Wrynn"].Mythic = 15455	--Anduin (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Lords of Dread"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Lords of Dread"].LFR = 15456	--Lords of Dread (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Lords of Dread"].Normal = 15457	--Lords of Dread (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Lords of Dread"].Heroic = 15458	--Lords of Dread (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Lords of Dread"].Mythic = 15459	--Lords of Dread (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["Rygelon"] = {}
+SepulcerOfTheFirstOnesCriteriaID["Rygelon"].LFR = 15460	--Rygelon (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Rygelon"].Normal = 15461	--Rygelon (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Rygelon"].Heroic = 15462	--Rygelon (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["Rygelon"].Mythic = 15463	--Rygelon (Mythic Sepulcher of the First Ones)
+
+SepulcerOfTheFirstOnesCriteriaID["The Jailer"] = {}
+SepulcerOfTheFirstOnesCriteriaID["The Jailer"].LFR = 15464	--The Jailer (Raid Finder Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["The Jailer"].Normal = 15465	--The Jailer (Normal Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["The Jailer"].Heroic = 15466	--The Jailer (Heroic Sepulcher of the First Ones)
+SepulcerOfTheFirstOnesCriteriaID["The Jailer"].Mythic = 15467	--The Jailer (Mythic Sepulcher of the First Ones)
+
+
+

@@ -14,7 +14,7 @@ local raidDifficultyList = {
 }
 
 local RAID_LIST_DROPDOWN = {
-    ["Castle Nathria"] = {
+    [1] = {
         name = "Castle Nathria",
         numRaidBosses = 10,
         backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-CastleNathria",
@@ -23,28 +23,32 @@ local RAID_LIST_DROPDOWN = {
         raidProgress = {}
     };
 
-    ["Sanctum of Domination"] = {
+    [2] = {
         name = "Sanctum of Domination",
         numRaidBosses = 10,
         backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-SanctumofDomination",
         EJInstanceID = 1193,
-        criteriaIDList = SanctumOfDominationCriteriaID,        
+        criteriaIDList = SanctumOfDominationCriteriaID,
         raidProgress = {}
     };
 
     --Placeholder for 9.2 Raid
-    -- [RAID_LIST_FIRST_ONES] = {
-    --     name = "The First Ones",
-    --     numRaidBosses = NUM_FIRSTONES_BOSSES,
-    --     backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-ShadowFangKeep"
-    -- }
+    [3] = {
+        name = "Sepulcher of the First Ones",
+        numRaidBosses = 11,
+        backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-sepulcherofthefirstones",
+        EJInstanceID = 1195,
+        criteriaIDList = SepulcerOfTheFirstOnesCriteriaID,
+        raidProgress = {}
+    };
 };
 
 
 function RaidProgressDropdown_Initialize()
 	local info = UIDropDownMenu_CreateInfo();
 
-    for raid, raidInfo in pairs(RAID_LIST_DROPDOWN) do
+    for raid, raidInfo in ipairs(RAID_LIST_DROPDOWN) do
+        info.value = raid
         info.text = raidInfo.name;
         info.func = RaidProgressDropdown_SelectRaid
         info.checked = nil
@@ -76,9 +80,9 @@ function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
             currentComparePlayer = guid
 
             -- Current Tier set on load
-            UIDropDownMenu_SetSelectedValue(RaidListDropDown, "Sanctum of Domination");
-            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN["Sanctum of Domination"].backgroundTexture);
-            UIDropDownMenu_SetText(RaidListDropDown, "Sanctum of Domination")
+            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 3);
+            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[3].backgroundTexture);
+            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[3].name)
 
             local selectedRaid = UIDropDownMenu_GetSelectedValue(RaidListDropDown)
             self:BuildRaidProgressTable(selectedRaid)
@@ -95,7 +99,7 @@ function RaidProgressInspectLayoutMixin:BuildRaidProgressTable(selectedRaid)
     self.lastOption = nil
     self.InspectRaidDifficultyPool:ReleaseAll();
 
-    for raidTypeIndex, raidTypeName in ipairs (raidDifficultyList) do 
+    for raidTypeIndex, raidTypeName in ipairs (raidDifficultyList) do
         RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidTypeName] = {};
 
         for i = 1, RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses do
