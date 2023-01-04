@@ -5,6 +5,36 @@
 -- CastleNathriaCriteriaID[1].heroicID = 14420
 -- CastleNathriaCriteriaID[1].mythicID = 14421
 
+-- Shadowlands RAID_LIST_DROPDOWN table
+-- Removed from RaidProgressInspect to add Dragons
+-- [1] = {
+--     name = "Castle Nathria",
+--     numRaidBosses = 10,
+--     backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-CastleNathria",
+--     EJInstanceID = 1190,
+--     criteriaIDList = CastleNathriaCriteriaID,
+--     raidProgress = {}
+-- };
+
+-- [2] = {
+--     name = "Sanctum of Domination",
+--     numRaidBosses = 10,
+--     backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-SanctumofDomination",
+--     EJInstanceID = 1193,
+--     criteriaIDList = SanctumOfDominationCriteriaID,
+--     raidProgress = {}
+-- };
+
+-- --Placeholder for 9.2 Raid
+-- [3] = {
+--     name = "Sepulcher of the First Ones",
+--     numRaidBosses = 11,
+--     backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-sepulcherofthefirstones",
+--     EJInstanceID = 1195,
+--     criteriaIDList = SepulcerOfTheFirstOnesCriteriaID,
+--     raidProgress = {}
+-- };
+
 CastleNathriaCriteriaID = {}
 
 CastleNathriaCriteriaID["Shriekwing"] = {}

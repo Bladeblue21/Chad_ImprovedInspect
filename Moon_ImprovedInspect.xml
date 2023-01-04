@@ -1,9 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
-	<Script file="Chad_ImprovedInspect.lua"/>
+	<Script file="Moon_ImprovedInspect.lua"/>
 
 	<Frame name="ImprovedInspectFrame" toplevel="true" movable="true" enableMouse="true" hidden="false" parent="InspectFrame">
         <Frames>
-			<CheckButton name="ImprovedInspectFrameTab1" hidden="false" inherits="CommunitiesFrameTabTemplate" id = "5" virtual="true" motionScriptsWhileDisabled="true">
+			<CheckButton name="ImprovedInspectFrameTab1" hidden="false" inherits="CommunitiesFrameTabTemplate" id = "4" virtual="true" motionScriptsWhileDisabled="true">
                 <Anchors>
 					<Anchor point="LEFT" relativeTo="InspectFrame" relativePoint="TOPRIGHT" y="-50"/>
                 </Anchors>
@@ -14,7 +14,7 @@
 					<OnClick function="ImprovedInspect_OnClick"/>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="ImprovedInspectFrameTab2" hidden="false" inherits="CommunitiesFrameTabTemplate" id = "6" virtual="true" motionScriptsWhileDisabled="true">
+			<CheckButton name="ImprovedInspectFrameTab2" hidden="false" inherits="CommunitiesFrameTabTemplate" id = "5" virtual="true" motionScriptsWhileDisabled="true">
                 <Anchors>
 					<Anchor point="TOP" relativeTo="ImprovedInspectFrameTab1" relativePoint="BOTTOM">
 						<Offset>

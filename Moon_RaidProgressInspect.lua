@@ -4,6 +4,11 @@
         -- update the background image with correct file
         -- get critera ids and update other file for each boss  
 
+
+-- TODO:
+--     Swapping to other raids isn't pulling any data.
+
+
 local currentComparePlayer = nil;
 
 local raidDifficultyList = {
@@ -15,31 +20,12 @@ local raidDifficultyList = {
 
 local RAID_LIST_DROPDOWN = {
     [1] = {
-        name = "Castle Nathria",
-        numRaidBosses = 10,
-        backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-CastleNathria",
-        EJInstanceID = 1190,
-        criteriaIDList = CastleNathriaCriteriaID,
-        raidProgress = {}
-    };
-
-    [2] = {
-        name = "Sanctum of Domination",
-        numRaidBosses = 10,
-        backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-SanctumofDomination",
-        EJInstanceID = 1193,
-        criteriaIDList = SanctumOfDominationCriteriaID,
-        raidProgress = {}
-    };
-
-    --Placeholder for 9.2 Raid
-    [3] = {
-        name = "Sepulcher of the First Ones",
-        numRaidBosses = 11,
-        backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-sepulcherofthefirstones",
-        EJInstanceID = 1195,
-        criteriaIDList = SepulcerOfTheFirstOnesCriteriaID,
-        raidProgress = {}
+    name = "Vault of the Incarnates",
+    numRaidBosses = 8,
+    backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-VaultoftheIncarnates",
+    EJInstanceID = 1200,
+    criteriaIDList = VaultOfTheIncarnatesID,
+    raidProgress = {}
     };
 };
 
@@ -80,9 +66,9 @@ function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
             currentComparePlayer = guid
 
             -- Current Tier set on load
-            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 3);
-            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[3].backgroundTexture);
-            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[3].name)
+            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 1);
+            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[1].backgroundTexture);
+            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[1].name)
 
             local selectedRaid = UIDropDownMenu_GetSelectedValue(RaidListDropDown)
             self:BuildRaidProgressTable(selectedRaid)
@@ -98,20 +84,26 @@ end
 function RaidProgressInspectLayoutMixin:BuildRaidProgressTable(selectedRaid)
     self.lastOption = nil
     self.InspectRaidDifficultyPool:ReleaseAll();
+    EJ_SelectInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
 
-    for raidTypeIndex, raidTypeName in ipairs (raidDifficultyList) do
-        RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidTypeName] = {};
+    for raidTypeIndex, raidDifficulty in ipairs (raidDifficultyList) do
+        RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty] = {};
 
         for i = 1, RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses do
+            -- TODO: Not loading the instances from the dungeon journal on start.
             local name = EJ_GetEncounterInfoByIndex(i, RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
-            local statKillInfo = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name][raidTypeName]);
-            RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidTypeName][name] = statKillInfo;
+            local statKillInfo = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name][raidDifficulty]);
+            RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty][name] = statKillInfo;
         end
 
-        self.lastOption = self:SetupDifficultyDisplays(raidTypeName, RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidTypeName], selectedRaid);
+        self.lastOption = self:SetupDifficultyDisplays(raidDifficulty, RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty], selectedRaid);
     end
 end
 
+-- ClearAchievementComparisonUnit() SetAchievementComparisonUnit("target")
+-- GetComparisonStatistic(15137)
+-- EJ_SelectInstance(1200)
+-- EJ_GetEncounterInfoByIndex(1, 1200)
 
 function RaidProgressInspectLayoutMixin:SetupDifficultyDisplays(raidDifficulty, bossInfo, selectedRaid)
 	local inspectRaidDifficultyDisplay = self.InspectRaidDifficultyPool:Acquire(); 
@@ -141,7 +133,7 @@ function RaidProgressInspectDisplayMixin:ProgressSetUp(raidDifficulty, bossInfo,
 
     self.bossProgressBar:SetMinMaxValues(0, RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses);
     self.raidDifficultyLabel:SetText(raidDifficulty);
-    self.raidCurrentProg:SetText(totalBossKills);
+    self.raidCurrentProg:SetText(totalBossKills.."/"..RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses);
     self.bossProgressBar:SetValue(totalBossKills);
 
     self:Show();

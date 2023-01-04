@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
-	<Script file="Chad_MythicInspect.lua"/>
+	<Script file="Moon_MythicInspect.lua"/>
 
 	<Frame name="InspectDungeonIconFrameTemplate" mixin="MythicScoreInspectDisplayMixin" virtual="true">
 		<Size x="62" y="62"/>
@@ -61,12 +61,12 @@
 			<Layer level="ARTWORK">
 				<FontString parentKey="Title" justifyV="TOP" inherits="SystemFont22_Shadow_Outline" text="DUNGEON_SCORE">
 					<Anchors>
-						<Anchor point="CENTER" x="0" y="90"/>
+						<Anchor point="CENTER" x="0" y="95"/>
 					</Anchors>
 				</FontString>
 				<FontString parentKey="Score" justifyV="TOP" inherits="SystemFont_Shadow_Huge2_Outline">
 					<Anchors>
-						<Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM"/>
+						<Anchor point="TOP" relativeKey="$parent.Title" relativePoint="BOTTOM" y="-10"/>
 					</Anchors>
 				</FontString>
 			</Layer>
@@ -75,7 +75,7 @@
 			<Frame name="InspectScoreBoxFrame">
 				<Size x="300" y="150" />
 				<Anchors>
-					<Anchor point="BOTTOM" relativeKey="$parent.II_MythicScoreFrame" relativePoint="BOTTOM" y="90"/>
+					<Anchor point="BOTTOM" relativeKey="$parent.II_MythicScoreFrame" relativePoint="BOTTOM" y="80"/>
 				</Anchors>
 			</Frame>
 		</Frames>

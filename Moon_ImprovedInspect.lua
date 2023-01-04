@@ -1,9 +1,8 @@
-local NUM_IMPROVEDINSPECT_TABS = 6;
+local NUM_IMPROVEDINSPECT_TABS = 5;
 
 IMPROVED_INSPECT_WINDOWS = {
 	"Character",
 	"PvP",
-	"Talents",
 	"Guild",
 	"II_MythicScoreFrame",
 	"II_RaidProgressFrame",
@@ -32,9 +31,9 @@ function SwitchImprovedInspectTabs(id)
 			-- 	 return
 			-- end
 			
-			if(currentTab == 5) then
+			if(currentTab == 4) then
 				ImprovedInspectFrameTab1:SetChecked(false);
-			elseif (currentTab == 6) then
+			elseif (currentTab == 5) then
 				ImprovedInspectFrameTab2:SetChecked(false);
 			end
 			oldFrame:Hide();

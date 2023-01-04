@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\FrameXML\UI.xsd">
-	<Script file="Chad_RaidProgressInspect.lua"/>
+	<Script file="Moon_RaidProgressInspect.lua"/>
 	<Frame name="RaidProgressButtonTemplate" mixin="RaidProgressInspectDisplayMixin" virtual="true">
 		<Size x="300" y="70"/>
 		<Layers>
@@ -9,22 +9,14 @@
 						<Anchor point="TOPLEFT" x="7" y="-8"/>
 					</Anchors>
 				</FontString>
-				<FontString parentKey="raidMaxProg" inherits="SystemFont_Huge1_Outline" text="/10">
-					<Anchors>
-						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-10" y="18"/>
-					</Anchors>
-				</FontString>
 				<FontString parentKey="raidCurrentProg" inherits="SystemFont_Huge1_Outline">
 					<Anchors>
-						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-46" y="18"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-15" y="18"/>
 					</Anchors>
 				</FontString>
 			</Layer>
 			<Layer level="BACKGROUND">
 				<Texture parentKey="backTexture" atlas="pvpqueue-button-up"/>
-				<Anchors>
-					<Anchor point="TOP" relativeKey="$parent.II_RaidProgressFrame" y="-100"/>
-				</Anchors>
 			</Layer>
 		</Layers>
 		<Frames>
@@ -38,7 +30,6 @@
 				<Layers>
 					<Layer level="BACKGROUND">
 						<Texture parentKey="Background">
-							<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
 							<Color r="0.6" g="0.20" b="0.20" a="0.65"/>
 						</Texture>
 					</Layer>

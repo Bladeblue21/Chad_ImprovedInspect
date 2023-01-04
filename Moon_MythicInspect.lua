@@ -1,13 +1,19 @@
 -- ==================== Save this to sort maps by key level later!!!!!! ====================
 -- table.sort(inspectMythicMaps.runs, function(a, b) return a.bestRunLevel > b.bestRunLevel end);
 
+-- self.maps = C_ChallengeMode.GetMapTable();
+
+-- TODO: Can display the same instances if the player hasn't done all 8 before.
+        -- Basically if I run a Jade Temple it plugs it into the top spots and the last in the list will still be a Jade Temple
+        -- Need to find a way to replace the default challenge mode pool with ran keys
+
+
 local storeMythicScoreInfo = {};
 
 MythicScoreInspectLayoutMixin = {};
 
 function MythicScoreInspectLayoutMixin:OnLoad()
     self:RegisterEvent("INSPECT_READY");
-    -- self.maps = C_ChallengeMode.GetMapTable();
 	self.InspectDungeonsPool = CreateFramePool("Frame", InspectScoreBoxFrame, "InspectDungeonIconFrameTemplate");
 end
 
@@ -38,10 +44,6 @@ function MythicScoreInspectLayoutMixin:BuildMapTable()
         storeMythicScoreInfo[index].keyLevel = scoreInfo.bestRunLevel;
         storeMythicScoreInfo[index].dungeonScore = scoreInfo.mapScore;
     end
-
-    -- for m=1, #storeMythicScoreInfo do
-    --     print("MapID: "..storeMythicScoreInfo[m].mapID.." Level: "..storeMythicScoreInfo[m].keyLevel.." Score: "..storeMythicScoreInfo[m].dungeonScore);
-    -- end
 
     for index, option in pairs(storeMythicScoreInfo) do 
         self.lastOption = self:GetMythicScoreInfo(index, option);

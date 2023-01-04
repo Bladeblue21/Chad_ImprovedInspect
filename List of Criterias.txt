@@ -109,6 +109,64 @@ Sanctum of Domination
 
 
 
+Sepulcher of the First Ones
+
+15424	Vigilant Guardian (Raid Finder Sepulcher of the First Ones)
+15425	Vigilant Guardian (Normal Sepulcher of the First Ones)
+15426	Vigilant Guardian (Heroic Sepulcher of the First Ones)
+15427	Vigilant Guardian (Mythic Sepulcher of the First Ones)
+
+15428	Skolex (Raid Finder Sepulcher of the First Ones)	
+15429	Skolex (Normal Sepulcher of the First Ones)	
+15430	Skolex (Heroic Sepulcher of the First Ones)	
+15431	Skolex (Mythic Sepulcher of the First Ones)	
+
+15432	Artificer Xy'mox (Raid Finder Sepulcher of the First Ones)
+15433	Artificer Xy'mox (Normal Sepulcher of the First Ones)
+15434	Artificer Xy'mox (Heroic Sepulcher of the First Ones)
+15435	Artificer Xy'mox (Mythic Sepulcher of the First Ones)
+
+15436	Dausegne (Raid Finder Sepulcher of the First Ones)
+15437	Dausegne (Normal Sepulcher of the First Ones)
+15438	Dausegne (Heroic Sepulcher of the First Ones)
+15439	Dausegne (Mythic Sepulcher of the First Ones)
+
+15440	Prototype Pantheon (Raid Finder Sepulcher of the First Ones)
+15441	Prototype Pantheon (Normal Sepulcher of the First Ones)
+15442	Prototype Pantheon (Heroic Sepulcher of the First Ones)
+15443	Prototype Pantheon (Mythic Sepulcher of the First Ones)
+
+15444	Lihuvim (Raid Finder Sepulcher of the First Ones)
+15445	Lihuvim (Normal Sepulcher of the First Ones)
+15446	Lihuvim (Heroic Sepulcher of the First Ones)
+15447	Lihuvim (Mythic Sepulcher of the First Ones)
+
+15448	Halondrus (Raid Finder Sepulcher of the First Ones)
+15449	Halondrus (Normal Sepulcher of the First Ones)
+15450	Halondrus (Heroic Sepulcher of the First Ones)
+15451	Halondrus (Mythic Sepulcher of the First Ones)
+
+15452	Anduin (Raid Finder Sepulcher of the First Ones)
+15453	Anduin (Normal Sepulcher of the First Ones)
+15454	Anduin (Heroic Sepulcher of the First Ones)
+15455	Anduin (Mythic Sepulcher of the First Ones)
+
+15456	Lords of Dread (Raid Finder Sepulcher of the First Ones)
+15457	Lords of Dread (Normal Sepulcher of the First Ones)
+15458	Lords of Dread (Heroic Sepulcher of the First Ones)
+15459	Lords of Dread (Mythic Sepulcher of the First Ones)
+
+15460	Rygelon (Raid Finder Sepulcher of the First Ones)
+15461	Rygelon (Normal Sepulcher of the First Ones)
+15462	Rygelon (Heroic Sepulcher of the First Ones)
+15463	Rygelon (Mythic Sepulcher of the First Ones)
+
+15464	The Jailer (Raid Finder Sepulcher of the First Ones)
+15465	The Jailer (Normal Sepulcher of the First Ones)
+15466	The Jailer (Heroic Sepulcher of the First Ones)
+15467	The Jailer (Mythic Sepulcher of the First Ones)
+
+
 
 
 

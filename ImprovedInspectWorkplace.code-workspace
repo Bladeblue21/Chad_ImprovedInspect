@@ -5,8 +5,7 @@
 			"path": "."
 		},
 		{
-			"name": "Interface",
-			"path": "..\\..\\..\\BlizzardInterfaceCode\\Interface"
+			"path": "../../../BlizzardInterfaceCode/Interface"
 		}
 	],
 	"settings": {}
