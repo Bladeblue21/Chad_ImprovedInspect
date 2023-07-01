@@ -1,4 +1,4 @@
---For 9.2 Raid checklist
+--For 10.1 Raid checklist
     -- add to RAID_LIST_DROPDOWN
         -- get EJ_SelectInstance id
         -- update the background image with correct file
@@ -25,6 +25,15 @@ local RAID_LIST_DROPDOWN = {
     backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-VaultoftheIncarnates",
     EJInstanceID = 1200,
     criteriaIDList = VaultOfTheIncarnatesID,
+    raidProgress = {}
+    };
+
+    [2] = {
+    name = "Aberrus, the Shadowed Crucible",
+    numRaidBosses = 9,
+    backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-Aberrus",
+    EJInstanceID = 1208,
+    criteriaIDList = AberrusID,
     raidProgress = {}
     };
 };
@@ -66,9 +75,9 @@ function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
             currentComparePlayer = guid
 
             -- Current Tier set on load
-            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 1);
-            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[1].backgroundTexture);
-            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[1].name)
+            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 2);
+            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[2].backgroundTexture);
+            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[2].name)
 
             local selectedRaid = UIDropDownMenu_GetSelectedValue(RaidListDropDown)
             self:BuildRaidProgressTable(selectedRaid)
@@ -84,26 +93,32 @@ end
 function RaidProgressInspectLayoutMixin:BuildRaidProgressTable(selectedRaid)
     self.lastOption = nil
     self.InspectRaidDifficultyPool:ReleaseAll();
+
+    -- Loads the EJ for the current raid instance
     EJ_SelectInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
+    -- EncounterJournal_DisplayInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
 
     for raidTypeIndex, raidDifficulty in ipairs (raidDifficultyList) do
         RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty] = {};
 
         for i = 1, RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses do
-            -- TODO: Not loading the instances from the dungeon journal on start.
             local name = EJ_GetEncounterInfoByIndex(i, RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
             local statKillInfo = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name][raidDifficulty]);
+
             RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty][name] = statKillInfo;
         end
 
         self.lastOption = self:SetupDifficultyDisplays(raidDifficulty, RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty], selectedRaid);
     end
 end
+    
+
 
 -- ClearAchievementComparisonUnit() SetAchievementComparisonUnit("target")
--- GetComparisonStatistic(15137)
+-- GetComparisonStatistic(16380)
 -- EJ_SelectInstance(1200)
--- EJ_GetEncounterInfoByIndex(1, 1200)
+-- EJ_GetEncounterInfoByIndex(1, 1208)
+-- EncounterJournal_DisplayInstance(1208)
 
 function RaidProgressInspectLayoutMixin:SetupDifficultyDisplays(raidDifficulty, bossInfo, selectedRaid)
 	local inspectRaidDifficultyDisplay = self.InspectRaidDifficultyPool:Acquire(); 
@@ -123,6 +138,7 @@ end
 RaidProgressInspectDisplayMixin = {}
 
 function RaidProgressInspectDisplayMixin:ProgressSetUp(raidDifficulty, bossInfo, selectedRaid)
+
     local totalBossKills = 0;
 
     for bossname, statValue in pairs(RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty]) do

@@ -17,8 +17,6 @@ function MythicScoreInspectLayoutMixin:OnLoad()
 	self.InspectDungeonsPool = CreateFramePool("Frame", InspectScoreBoxFrame, "InspectDungeonIconFrameTemplate");
 end
 
-
-
 function MythicScoreInspectLayoutMixin:OnShow()
     if not self.maps then
         self.maps = C_ChallengeMode.GetMapTable();
@@ -30,6 +28,10 @@ function MythicScoreInspectLayoutMixin:BuildMapTable()
     self.lastOption = nil
     self.InspectDungeonsPool:ReleaseAll();
     local inspectMythicMapsInfo = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("target");
+
+    if (not inspectMythicMapsInfo) then
+        return
+    end
 
     local playerTotalScore = inspectMythicMapsInfo.currentSeasonScore
     local inspectMapInfo = inspectMythicMapsInfo.runs
