@@ -1,15 +1,15 @@
---For 10.1 Raid checklist
+--For 10.2 Raid checklist
+    -- change numExpansionTiers to 3
     -- add to RAID_LIST_DROPDOWN
+        -- set default instance to new tier
         -- get EJ_SelectInstance id
         -- update the background image with correct file
         -- get critera ids and update other file for each boss  
 
 
--- TODO:
---     Swapping to other raids isn't pulling any data.
-
 
 local currentComparePlayer = nil;
+local numExpansionTiers = 2;
 
 local raidDifficultyList = {
     [1] = "LFR",
@@ -55,7 +55,7 @@ function RaidProgressDropdown_SelectRaid(button)
     local selectedRaid = button.value;
     UIDropDownMenu_SetSelectedValue(RaidListDropDown, selectedRaid);
 
-    II_RaidProgressFrame:BuildRaidProgressTable(selectedRaid)
+    II_RaidProgressFrame:SetupDifficultyDisplays(selectedRaid)
     II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[selectedRaid].backgroundTexture);
 end
 
@@ -80,7 +80,8 @@ function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
             UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[2].name)
 
             local selectedRaid = UIDropDownMenu_GetSelectedValue(RaidListDropDown)
-            self:BuildRaidProgressTable(selectedRaid)
+            self:BuildRaidProgressTable()
+            self:SetupDifficultyDisplays(selectedRaid)
         end
     end
 end
@@ -90,54 +91,54 @@ function RaidProgressInspectLayoutMixin:OnShow()
     SetAchievementComparisonUnit("target")
 end
 
-function RaidProgressInspectLayoutMixin:BuildRaidProgressTable(selectedRaid)
-    self.lastOption = nil
-    self.InspectRaidDifficultyPool:ReleaseAll();
+function RaidProgressInspectLayoutMixin:BuildRaidProgressTable()
+    for raidTier = 1, numExpansionTiers do
+        -- Loads the EJ for the current raid instance
+        EJ_SelectInstance(RAID_LIST_DROPDOWN[raidTier].EJInstanceID)
+        -- EncounterJournal_DisplayInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
 
-    -- Loads the EJ for the current raid instance
-    EJ_SelectInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
-    -- EncounterJournal_DisplayInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
+        for raidTypeIndex, raidDifficulty in ipairs (raidDifficultyList) do
+            RAID_LIST_DROPDOWN[raidTier].raidProgress[raidDifficulty] = {};
 
-    for raidTypeIndex, raidDifficulty in ipairs (raidDifficultyList) do
-        RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty] = {};
+            for i = 1, RAID_LIST_DROPDOWN[raidTier].numRaidBosses do
+                local name = EJ_GetEncounterInfoByIndex(i, RAID_LIST_DROPDOWN[raidTier].EJInstanceID)
+                local statKillInfo = GetComparisonStatistic(RAID_LIST_DROPDOWN[raidTier].criteriaIDList[name][raidDifficulty]);
 
-        for i = 1, RAID_LIST_DROPDOWN[selectedRaid].numRaidBosses do
-            local name = EJ_GetEncounterInfoByIndex(i, RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
-            local statKillInfo = GetComparisonStatistic(RAID_LIST_DROPDOWN[selectedRaid].criteriaIDList[name][raidDifficulty]);
-
-            RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty][name] = statKillInfo;
+                RAID_LIST_DROPDOWN[raidTier].raidProgress[raidDifficulty][name] = statKillInfo;
+            end
         end
-
-        self.lastOption = self:SetupDifficultyDisplays(raidDifficulty, RAID_LIST_DROPDOWN[selectedRaid].raidProgress[raidDifficulty], selectedRaid);
     end
 end
     
-
-
 -- ClearAchievementComparisonUnit() SetAchievementComparisonUnit("target")
 -- GetComparisonStatistic(16380)
 -- EJ_SelectInstance(1200)
 -- EJ_GetEncounterInfoByIndex(1, 1208)
 -- EncounterJournal_DisplayInstance(1208)
 
-function RaidProgressInspectLayoutMixin:SetupDifficultyDisplays(raidDifficulty, bossInfo, selectedRaid)
-	local inspectRaidDifficultyDisplay = self.InspectRaidDifficultyPool:Acquire(); 
+function RaidProgressInspectLayoutMixin:SetupDifficultyDisplays(selectedRaid)
+    self.lastOption = nil
+    self.InspectRaidDifficultyPool:ReleaseAll();
 
-    if (not self.lastOption) then 
-		inspectRaidDifficultyDisplay:SetPoint("TOPLEFT", InspectRaidProgressBoxFrame); 
-		self.previousRowOption = inspectRaidDifficultyDisplay; 
-	else 
-		inspectRaidDifficultyDisplay:SetPoint("TOP", self.lastOption, "BOTTOM", 0, -10);
-	end	
+    for raidTypeIndex, raidDifficulty in ipairs (raidDifficultyList) do
+        local inspectRaidDifficultyDisplay = self.InspectRaidDifficultyPool:Acquire(); 
 
-	inspectRaidDifficultyDisplay:ProgressSetUp(raidDifficulty, bossInfo, selectedRaid);
-	return inspectRaidDifficultyDisplay;
+        if (not self.lastOption) then 
+            inspectRaidDifficultyDisplay:SetPoint("TOPLEFT", InspectRaidProgressBoxFrame); 
+            self.previousRowOption = inspectRaidDifficultyDisplay; 
+        else 
+            inspectRaidDifficultyDisplay:SetPoint("TOP", self.lastOption, "BOTTOM", 0, -10);
+        end	
+
+        inspectRaidDifficultyDisplay:ProgressSetUp(raidDifficulty, selectedRaid);
+        self.lastOption = inspectRaidDifficultyDisplay;
+    end 
 end
 
 
 RaidProgressInspectDisplayMixin = {}
 
-function RaidProgressInspectDisplayMixin:ProgressSetUp(raidDifficulty, bossInfo, selectedRaid)
+function RaidProgressInspectDisplayMixin:ProgressSetUp(raidDifficulty, selectedRaid)
 
     local totalBossKills = 0;
 
