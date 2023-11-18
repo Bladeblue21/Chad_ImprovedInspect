@@ -9,7 +9,7 @@
 
 
 local currentComparePlayer = nil;
-local numExpansionTiers = 2;
+local numExpansionTiers = 3;
 
 local raidDifficultyList = {
     [1] = "LFR",
@@ -34,6 +34,15 @@ local RAID_LIST_DROPDOWN = {
     backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-Aberrus",
     EJInstanceID = 1208,
     criteriaIDList = AberrusID,
+    raidProgress = {}
+    };
+
+    [3] = {
+    name = "Amirdrassil, the Dream's Hope",
+    numRaidBosses = 9,
+    backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-EmeraldDream",
+    EJInstanceID = 1207,
+    criteriaIDList = AmirdrassilID,
     raidProgress = {}
     };
 };
@@ -75,9 +84,9 @@ function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
             currentComparePlayer = guid
 
             -- Current Tier set on load
-            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 2);
-            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[2].backgroundTexture);
-            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[2].name)
+            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 3);
+            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[3].backgroundTexture);
+            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[3].name)
 
             local selectedRaid = UIDropDownMenu_GetSelectedValue(RaidListDropDown)
             self:BuildRaidProgressTable()

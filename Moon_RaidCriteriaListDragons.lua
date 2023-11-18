@@ -115,3 +115,62 @@ AberrusID["Scalecommander Sarkareth"].LFR = 18187
 AberrusID["Scalecommander Sarkareth"].Normal = 18198
 AberrusID["Scalecommander Sarkareth"].Heroic = 18218
 AberrusID["Scalecommander Sarkareth"].Mythic = 18227
+
+
+
+--3rd raid
+AmirdrassilID = {}
+
+AmirdrassilID["Gnarlroot"] = {}
+AmirdrassilID["Gnarlroot"].LFR = 19348
+AmirdrassilID["Gnarlroot"].Normal = 19360
+AmirdrassilID["Gnarlroot"].Heroic = 19369
+AmirdrassilID["Gnarlroot"].Mythic = 19378
+
+AmirdrassilID["Igira the Cruel"] = {}
+AmirdrassilID["Igira the Cruel"].LFR = 19352
+AmirdrassilID["Igira the Cruel"].Normal = 19361
+AmirdrassilID["Igira the Cruel"].Heroic = 19370
+AmirdrassilID["Igira the Cruel"].Mythic = 19379
+
+AmirdrassilID["Volcoross"] = {}
+AmirdrassilID["Volcoross"].LFR = 19353
+AmirdrassilID["Volcoross"].Normal = 19362
+AmirdrassilID["Volcoross"].Heroic = 19371
+AmirdrassilID["Volcoross"].Mythic = 19380
+
+AmirdrassilID["Council of Dreams"] = {}
+AmirdrassilID["Council of Dreams"].LFR = 19354
+AmirdrassilID["Council of Dreams"].Normal = 19363
+AmirdrassilID["Council of Dreams"].Heroic = 19372
+AmirdrassilID["Council of Dreams"].Mythic = 19381
+
+AmirdrassilID["Larodar, Keeper of the Flame"] = {}
+AmirdrassilID["Larodar, Keeper of the Flame"].LFR = 19355
+AmirdrassilID["Larodar, Keeper of the Flame"].Normal = 19364
+AmirdrassilID["Larodar, Keeper of the Flame"].Heroic = 19373
+AmirdrassilID["Larodar, Keeper of the Flame"].Mythic = 19382
+
+AmirdrassilID["Nymue, Weaver of the Cycle"] = {}
+AmirdrassilID["Nymue, Weaver of the Cycle"].LFR = 19356
+AmirdrassilID["Nymue, Weaver of the Cycle"].Normal = 19365
+AmirdrassilID["Nymue, Weaver of the Cycle"].Heroic = 19374
+AmirdrassilID["Nymue, Weaver of the Cycle"].Mythic = 19383
+
+AmirdrassilID["Smolderon"] = {}
+AmirdrassilID["Smolderon"].LFR = 19357
+AmirdrassilID["Smolderon"].Normal = 19366
+AmirdrassilID["Smolderon"].Heroic = 19375
+AmirdrassilID["Smolderon"].Mythic = 19384
+
+AmirdrassilID["Tindral Sageswift, Seer of the Flame"] = {}
+AmirdrassilID["Tindral Sageswift, Seer of the Flame"].LFR = 19358
+AmirdrassilID["Tindral Sageswift, Seer of the Flame"].Normal = 19367
+AmirdrassilID["Tindral Sageswift, Seer of the Flame"].Heroic = 19376
+AmirdrassilID["Tindral Sageswift, Seer of the Flame"].Mythic = 19385
+
+AmirdrassilID["Fyrakk the Blazing"] = {}
+AmirdrassilID["Fyrakk the Blazing"].LFR = 19359
+AmirdrassilID["Fyrakk the Blazing"].Normal = 19368
+AmirdrassilID["Fyrakk the Blazing"].Heroic = 19377
+AmirdrassilID["Fyrakk the Blazing"].Mythic = 19386
