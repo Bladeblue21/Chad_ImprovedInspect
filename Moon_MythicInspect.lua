@@ -10,11 +10,25 @@
 
 local storeMythicScoreInfo = {};
 
+local function GetEntryByMapID(store, mapID)
+    for k, v in pairs(store) do 
+        if v.mapID == mapID then
+            return k;
+        end
+    end
+end
+
 MythicScoreInspectLayoutMixin = {};
 
 function MythicScoreInspectLayoutMixin:OnLoad()
     self:RegisterEvent("INSPECT_READY");
 	self.InspectDungeonsPool = CreateFramePool("Frame", InspectScoreBoxFrame, "InspectDungeonIconFrameTemplate");
+end
+
+function MythicScoreInspectLayoutMixin:OnEvent(event, ...)
+    if event == "INSPECT_READY" then
+        self.guid = ...;
+    end
 end
 
 function MythicScoreInspectLayoutMixin:OnShow()
@@ -25,9 +39,11 @@ function MythicScoreInspectLayoutMixin:OnShow()
 end
 
 function MythicScoreInspectLayoutMixin:BuildMapTable()
-    self.lastOption = nil
+    self.lastOption = nil;
     self.InspectDungeonsPool:ReleaseAll();
-    local inspectMythicMapsInfo = C_PlayerInfo.GetPlayerMythicPlusRatingSummary("target");
+    local unitToken = UnitTokenFromGUID(self.guid);
+
+    local inspectMythicMapsInfo = C_PlayerInfo.GetPlayerMythicPlusRatingSummary(unitToken);
 
     if (not inspectMythicMapsInfo) then
         return
@@ -40,14 +56,17 @@ function MythicScoreInspectLayoutMixin:BuildMapTable()
         storeMythicScoreInfo[index] = { mapID = map, timed = 0, keyLevel = 0, dungeonScore = 0 }
     end
 
-    for index, scoreInfo in ipairs(inspectMapInfo) do
-        storeMythicScoreInfo[index].mapID = scoreInfo.challengeModeID;
-        storeMythicScoreInfo[index].timed = scoreInfo.finishedSuccess;
-        storeMythicScoreInfo[index].keyLevel = scoreInfo.bestRunLevel;
-        storeMythicScoreInfo[index].dungeonScore = scoreInfo.mapScore;
+    for index, inspectInfo in ipairs(inspectMapInfo) do
+        local mapIndex = GetEntryByMapID(storeMythicScoreInfo, inspectInfo.challengeModeID)
+        if mapIndex then
+            storeMythicScoreInfo[mapIndex].mapID = inspectInfo.challengeModeID;
+            storeMythicScoreInfo[mapIndex].timed = inspectInfo.finishedSuccess;
+            storeMythicScoreInfo[mapIndex].keyLevel = inspectInfo.bestRunLevel;
+            storeMythicScoreInfo[mapIndex].dungeonScore = inspectInfo.mapScore;
+        end
     end
 
-    for index, option in pairs(storeMythicScoreInfo) do 
+    for index, option in ipairs(storeMythicScoreInfo) do 
         self.lastOption = self:GetMythicScoreInfo(index, option);
     end
 
@@ -68,7 +87,7 @@ function MythicScoreInspectLayoutMixin:GetMythicScoreInfo(index, optionInfo)
 		inspectDungeonScoreDisplay:SetPoint("LEFT", self.lastOption, "RIGHT", 15, 0);
 	end	
 
-	inspectDungeonScoreDisplay:IconSetUp(optionInfo);
+	inspectDungeonScoreDisplay:IconSetUp(index, optionInfo);
 	return inspectDungeonScoreDisplay;
 end 
 
@@ -83,13 +102,19 @@ function MythicScoreInspectLayoutMixin:ScoreRating(totalScore)
 
     self.Score:SetText(totalScore);
     self.Score:SetTextColor(color.r, color.g, color.b);
-    self.Score:Show()
+    self.Score:Show();
+end
+
+function MythicScoreInspectLayoutMixin:OnHide()
+    for i, v in ipairs(storeMythicScoreInfo) do
+        storeMythicScoreInfo[i] = nil;
+    end
 end
 
 
 MythicScoreInspectDisplayMixin = {};
 
-function MythicScoreInspectDisplayMixin:IconSetUp(mapInfo)
+function MythicScoreInspectDisplayMixin:IconSetUp(indes, mapInfo)
     local _, _, _, texture = C_ChallengeMode.GetMapUIInfo(mapInfo.mapID);
 
     if (texture == 0) then
@@ -124,8 +149,45 @@ function MythicScoreInspectDisplayMixin:IconSetUp(mapInfo)
     self:Show();
 end
 
-function MythicInspect_OnHide()
-    for i, v in ipairs(storeMythicScoreInfo) do 
-        storeMythicScoreInfo[i] = nil 
+function MythicScoreInspectDisplayMixin:OnEnter()
+    local name = C_ChallengeMode.GetMapUIInfo(self.mapID);
+    GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+    GameTooltip:SetText(name, 1, 1, 1);
+
+    for index, info in pairs(storeMythicScoreInfo) do
+        if self.mapID == info.mapID then
+            self.keyLevel = info.keyLevel;
+            self.timed = info.timed;
+            self.bestRunTime = info.bestRunTime;
+            self.dungeonScore = info.dungeonScore;
+            break;
+        end
     end
+
+    if self.keyLevel < 1 then
+        GameTooltip:Show();
+        return
+    end
+
+    local overAllScore = self.dungeonScore;
+    local color;
+    if(overAllScore) then
+        color = C_ChallengeMode.GetSpecificDungeonOverallScoreRarityColor(overAllScore);
+    end
+
+    if (not color) then
+        color = HIGHLIGHT_FONT_COLOR;
+    end
+
+    GameTooltip_AddBlankLineToTooltip(GameTooltip);
+    GameTooltip_AddNormalLine(GameTooltip, DUNGEON_SCORE_TOTAL_SCORE:format(color:WrapTextInColorCode(self.dungeonScore)), GREEN_FONT_COLOR);
+    GameTooltip_AddColoredLine(GameTooltip, MYTHIC_PLUS_POWER_LEVEL:format(self.keyLevel), HIGHLIGHT_FONT_COLOR);
+
+    if (self.timed) then
+        GameTooltip_AddColoredLine(GameTooltip, SecondsToClock(self.bestRunTime/1000, false), HIGHLIGHT_FONT_COLOR);
+    else
+        GameTooltip_AddColoredLine(GameTooltip, DUNGEON_SCORE_OVERTIME_TIME:format(SecondsToClock(self.bestRunTime/1000, false)), LIGHTGRAY_FONT_COLOR);
+    end
+
+    GameTooltip:Show();
 end

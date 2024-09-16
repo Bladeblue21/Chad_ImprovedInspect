@@ -9,7 +9,7 @@
 
 
 local currentComparePlayer = nil;
-local numExpansionTiers = 3;
+local numExpansionTiers = 1;
 
 local raidDifficultyList = {
     [1] = "LFR",
@@ -20,29 +20,11 @@ local raidDifficultyList = {
 
 local RAID_LIST_DROPDOWN = {
     [1] = {
-    name = "Vault of the Incarnates",
+    name = "Nerubar Palace",
     numRaidBosses = 8,
-    backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-VaultoftheIncarnates",
-    EJInstanceID = 1200,
-    criteriaIDList = VaultOfTheIncarnatesID,
-    raidProgress = {}
-    };
-
-    [2] = {
-    name = "Aberrus, the Shadowed Crucible",
-    numRaidBosses = 9,
-    backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-Aberrus",
-    EJInstanceID = 1208,
-    criteriaIDList = AberrusID,
-    raidProgress = {}
-    };
-
-    [3] = {
-    name = "Amirdrassil, the Dream's Hope",
-    numRaidBosses = 9,
-    backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-EmeraldDream",
-    EJInstanceID = 1207,
-    criteriaIDList = AmirdrassilID,
+    backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-NerubarPalace",
+    EJInstanceID = 1273,
+    criteriaIDList = NerubarPalaceID,
     raidProgress = {}
     };
 };
@@ -84,9 +66,10 @@ function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
             currentComparePlayer = guid
 
             -- Current Tier set on load
-            UIDropDownMenu_SetSelectedValue(RaidListDropDown, 3);
-            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[3].backgroundTexture);
-            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[3].name)
+            currentTier = 1;
+            UIDropDownMenu_SetSelectedValue(RaidListDropDown, currentTier);
+            II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[currentTier].backgroundTexture);
+            UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[currentTier].name)
 
             local selectedRaid = UIDropDownMenu_GetSelectedValue(RaidListDropDown)
             self:BuildRaidProgressTable()

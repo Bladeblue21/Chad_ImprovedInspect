@@ -1,7 +1,7 @@
 ## RequiredDep: Blizzard_Communities
 ## RequiredDep: Blizzard_InspectUI
 
-Moon_RaidCriteriaListDragons.lua
+Moon_RaidCriteriaListWarWithin.lua
 Moon_ImprovedInspect.xml
 Moon_MythicInspect.xml
 Moon_RaidProgressInspect.xml

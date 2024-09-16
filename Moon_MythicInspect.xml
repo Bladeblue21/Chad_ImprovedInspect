@@ -81,8 +81,9 @@
 		</Frames>
 		<Scripts>
 			<OnLoad method="OnLoad"/>
+			<OnEvent method="OnEvent"/>
 			<OnShow method="OnShow"/>
-			<OnHide function="MythicInspect_OnHide"/>
+			<OnHide method="OnHide"/>
 		</Scripts>
 	</Frame>
 </Ui>
