@@ -44,6 +44,10 @@
 				</FontString>
 			</Layer>
 		</Layers>
+		<Scripts>
+			<OnEnter method="OnEnter"/>
+			<OnLeave method="OnLeave"/>
+		</Scripts>
 	</Frame>
 
 	<Frame name="II_MythicScoreFrame" toplevel="true" parent="InspectFrame" mixin="MythicScoreInspectLayoutMixin" hidden="true" setAllPoints="true" id="5">

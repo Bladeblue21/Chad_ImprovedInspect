@@ -1,5 +1,5 @@
---For 10.2 Raid checklist
-    -- change numExpansionTiers to 3
+--New Raid checklist
+    -- change numExpansionTiers 
     -- add to RAID_LIST_DROPDOWN
         -- set default instance to new tier
         -- get EJ_SelectInstance id
@@ -18,6 +18,7 @@ local raidDifficultyList = {
     [4] = "Mythic"
 }
 
+--List of all raids in current expansion
 local RAID_LIST_DROPDOWN = {
     [1] = {
     name = "Nerubar Palace",
@@ -83,11 +84,11 @@ function RaidProgressInspectLayoutMixin:OnShow()
     SetAchievementComparisonUnit("target")
 end
 
+--Pulls the inspected players boss kill stats
 function RaidProgressInspectLayoutMixin:BuildRaidProgressTable()
     for raidTier = 1, numExpansionTiers do
         -- Loads the EJ for the current raid instance
         EJ_SelectInstance(RAID_LIST_DROPDOWN[raidTier].EJInstanceID)
-        -- EncounterJournal_DisplayInstance(RAID_LIST_DROPDOWN[selectedRaid].EJInstanceID)
 
         for raidTypeIndex, raidDifficulty in ipairs (raidDifficultyList) do
             RAID_LIST_DROPDOWN[raidTier].raidProgress[raidDifficulty] = {};
@@ -101,13 +102,8 @@ function RaidProgressInspectLayoutMixin:BuildRaidProgressTable()
         end
     end
 end
-    
--- ClearAchievementComparisonUnit() SetAchievementComparisonUnit("target")
--- GetComparisonStatistic(16380)
--- EJ_SelectInstance(1200)
--- EJ_GetEncounterInfoByIndex(1, 1208)
--- EncounterJournal_DisplayInstance(1208)
 
+--Creates a bar for each raid difficulty.
 function RaidProgressInspectLayoutMixin:SetupDifficultyDisplays(selectedRaid)
     self.lastOption = nil
     self.InspectRaidDifficultyPool:ReleaseAll();

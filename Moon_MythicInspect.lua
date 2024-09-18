@@ -1,13 +1,3 @@
--- ==================== Save this to sort maps by key level later!!!!!! ====================
--- table.sort(inspectMythicMaps.runs, function(a, b) return a.bestRunLevel > b.bestRunLevel end);
-
--- self.maps = C_ChallengeMode.GetMapTable();
-
--- TODO: Can display the same instances if the player hasn't done all 8 before.
-        -- Basically if I run a Jade Temple it plugs it into the top spots and the last in the list will still be a Jade Temple
-        -- Need to find a way to replace the default challenge mode pool with ran keys
-
-
 local storeMythicScoreInfo = {};
 
 local function GetEntryByMapID(store, mapID)
@@ -38,6 +28,7 @@ function MythicScoreInspectLayoutMixin:OnShow()
     self:BuildMapTable();
 end
 
+--Table to hold inspected players m+ stats
 function MythicScoreInspectLayoutMixin:BuildMapTable()
     self.lastOption = nil;
     self.InspectDungeonsPool:ReleaseAll();
@@ -63,6 +54,7 @@ function MythicScoreInspectLayoutMixin:BuildMapTable()
             storeMythicScoreInfo[mapIndex].timed = inspectInfo.finishedSuccess;
             storeMythicScoreInfo[mapIndex].keyLevel = inspectInfo.bestRunLevel;
             storeMythicScoreInfo[mapIndex].dungeonScore = inspectInfo.mapScore;
+            storeMythicScoreInfo[mapIndex].bestRunTime = inspectInfo.bestRunDurationMS;
         end
     end
 
@@ -73,10 +65,12 @@ function MythicScoreInspectLayoutMixin:BuildMapTable()
     self:ScoreRating(playerTotalScore)
 end
 
+--Creates the display for each dungeon
 function MythicScoreInspectLayoutMixin:GetMythicScoreInfo(index, optionInfo)
     local MAX_DUNGEONS_IN_ROWS = 4;
 	local inspectDungeonScoreDisplay = self.InspectDungeonsPool:Acquire(); 
 
+    --Displays m+ dungeons in a 4x2 order
 	if (not self.lastOption) then 
 		inspectDungeonScoreDisplay:SetPoint("TOPLEFT", InspectScoreBoxFrame); 
 		self.previousRowOption = inspectDungeonScoreDisplay; 
@@ -91,6 +85,7 @@ function MythicScoreInspectLayoutMixin:GetMythicScoreInfo(index, optionInfo)
 	return inspectDungeonScoreDisplay;
 end 
 
+--Total season m+ score
 function MythicScoreInspectLayoutMixin:ScoreRating(totalScore)
 	local color;
 
@@ -114,8 +109,10 @@ end
 
 MythicScoreInspectDisplayMixin = {};
 
+--Creates the box for each dungeon. Shows keyLevel and highest score of that dungeon.
 function MythicScoreInspectDisplayMixin:IconSetUp(indes, mapInfo)
     local _, _, _, texture = C_ChallengeMode.GetMapUIInfo(mapInfo.mapID);
+    self.mapID = mapInfo.mapID;
 
     if (texture == 0) then
         texture = "Interface\\Icons\\achievement_bg_wineos_underxminutes";
@@ -190,4 +187,8 @@ function MythicScoreInspectDisplayMixin:OnEnter()
     end
 
     GameTooltip:Show();
+end
+
+function MythicScoreInspectDisplayMixin:OnLeave()
+    GameTooltip:Hide();
 end

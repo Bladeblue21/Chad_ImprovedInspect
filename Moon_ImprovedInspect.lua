@@ -27,10 +27,6 @@ function SwitchImprovedInspectTabs(id)
 
 	if ( newFrame ) then
 		if ( oldFrame ) then
-			-- if(id == currentTab) then
-			-- 	 return
-			-- end
-			
 			if(currentTab == 4) then
 				ImprovedInspectFrameTab1:SetChecked(false);
 			elseif (currentTab == 5) then
