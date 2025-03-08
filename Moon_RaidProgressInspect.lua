@@ -9,7 +9,7 @@
 
 
 local currentComparePlayer = nil;
-local numExpansionTiers = 1;
+local numExpansionTiers = 2;
 
 local raidDifficultyList = {
     [1] = "LFR",
@@ -27,6 +27,15 @@ local RAID_LIST_DROPDOWN = {
     EJInstanceID = 1273,
     criteriaIDList = NerubarPalaceID,
     raidProgress = {}
+    };
+
+    [2] = {
+        name = "Liberation of Undermine",
+        numRaidBosses = 8,
+        backgroundTexture = "Interface\\ENCOUNTERJOURNAL\\UI-EJ-BACKGROUND-casino",
+        EJInstanceID = 1296,
+        criteriaIDList = UndermineID,
+        raidProgress = {}
     };
 };
 
@@ -67,7 +76,7 @@ function RaidProgressInspectLayoutMixin:OnEvent(event, ...)
             currentComparePlayer = guid
 
             -- Current Tier set on load
-            currentTier = 1;
+            currentTier = 2;
             UIDropDownMenu_SetSelectedValue(RaidListDropDown, currentTier);
             II_RaidProgressFrame.BG:SetTexture(RAID_LIST_DROPDOWN[currentTier].backgroundTexture);
             UIDropDownMenu_SetText(RaidListDropDown, RAID_LIST_DROPDOWN[currentTier].name)
